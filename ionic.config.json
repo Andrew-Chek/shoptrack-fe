@@ -1,0 +1,7 @@
+{
+  "name": "shoptrack-fe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
