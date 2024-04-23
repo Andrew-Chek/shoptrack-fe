@@ -1,0 +1,375 @@
+@use '../../../styles/theme/theme-variables' as *;
+
+.tplInput {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    min-height: 24px;
+    height: fit-content;
+    width: 100%;
+    font-family: Ubuntu-Medium, sans-serif;
+}
+
+path {
+    stroke: black;
+}
+
+.tplSpan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #343434;
+}
+
+.tplBorder {
+    border: 1px solid #666769;
+    background-color: #27292e;
+}
+
+.tplSlider {
+    position: absolute;
+    content: '';
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.tplValid {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.tplResetValid {
+    margin: 0;
+    scale: 0;
+    padding-right: 0;
+    position: absolute;
+    content: none;
+    display: none;
+}
+
+.input-label {
+    color: $page-text;
+    font-family: Ubuntu-Regular, sans-serif;
+    line-height: 150%;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.input {
+    @extend .tplInput;
+    font-size: 14px;
+    -webkit-text-size-adjust: none;
+
+    &__ico {
+        width: 24px;
+        top: 10px;
+        left: 10px;
+        position: absolute;
+    }
+
+
+    &__enter {
+        color: $input-field-text;
+        background: $input-field-background;
+        width: 100%;
+        height: 44px;
+        border-radius: 10px;
+        border: 1px solid $input-field-default-border;
+        padding: 0 10px 0 40px;
+        display: block;
+
+        &::placeholder {
+            color: rgba(0, 0, 0, 0);
+        }
+    }
+
+    &__label {
+        color: $input-field-default-label;
+        position: absolute;
+        top: 13px;
+        left: 40px;
+        transition: 0.2s;
+    }
+
+    &__not_label {
+        color: $input-field-default-label;
+        position: absolute;
+        top: 13px;
+        left: 40px;
+    }
+
+    &__off_show {
+        display: none;
+    }
+
+
+    &__enter:focus {
+        padding-top: 5px;
+    }
+
+    &__enter:invalid~&__show {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    &__enter:valid~&__show {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    &__valid_filed:valid {
+        border: 2px solid $input-field-success-border;
+        padding-right: 40px;
+    }
+
+    &__enter:valid~&__valid {
+        display: block;
+        height: 0;
+    }
+
+    &__enter:valid~&__valid:not(.input__password):after {
+        @extend .tplValid;
+        content: url('~assets/icons/checks-icon.svg');
+    }
+
+    &__enter:focus~&__valid {
+        @extend .tplResetValid;
+    }
+
+    &__enter:focus~&__invalid {
+        @extend .tplResetValid;
+    }
+
+    &__enter:disabled {
+        border: 2px solid $app-font-table-header_2;
+        color: $app-font-border_15;
+    }
+
+    &__enter:valid~span {
+        color: rgba(0, 0, 0, 0);
+    }
+
+    &__enter:valid~img {
+        scale: 1;
+    }
+
+    &__enter:focus~&__label {
+        color: $input-field-default-label;
+        font-size: 10px;
+        top: 10%;
+        left: 42px;
+    }
+
+    &__enter:focus~&__not_label {
+        display: none;
+    }
+
+    &__enter:focus {
+        color: $input-field-text;
+        border: 2px solid $input-field-focus-border;
+        outline: none;
+        padding-right: 10px;
+    }
+
+    &__checkIco {
+        display: block;
+        position: absolute;
+        top: 2px;
+        left: 32px;
+    }
+
+    &__checkLabel {
+        display: block;
+        position: absolute;
+        width: 200px;
+        top: 2px;
+        left: 64px;
+        color: $page-sub-title;
+    }
+
+    &__check {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    &__checkmark {
+        pointer-events: none;
+        @extend .tplSpan;
+        border-radius: 4px;
+    }
+
+    &__radio {
+        @extend .tplSpan;
+        border-radius: 50%;
+        //background: #343434;
+        background: $input-check-background;
+    }
+
+    &__slider {
+        position: absolute;
+        background-color: #1c1d1f;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: 0.4s;
+        border-radius: 34px;
+    }
+
+    &__slider:before {
+        @extend .tplSlider;
+        height: 20px;
+        width: 20px;
+        left: 2px;
+        bottom: 2px;
+        background-color: #292a2c;
+        z-index: 2;
+    }
+
+    &__slider:after {
+        @extend .tplSlider;
+        height: 6px;
+        width: 6px;
+        background-color: $input-check-check;
+        top: 9px;
+        left: 9px;
+        z-index: 3;
+    }
+
+    input:checked~&__slider:before {
+        transform: translateX(20px);
+        border: 1px solid #3d3e40;
+        height: 18px;
+        width: 18px;
+    }
+
+    input:checked~&__slider:after {
+        transform: translateX(20px);
+        background: $input-check-active-check;
+        box-shadow: $input-check-active-shadow;
+    }
+
+    &__text:before {
+        content: 'off';
+        position: absolute;
+        color: $input-switch-text;
+        font-size: 8px;
+        line-height: 150%;
+        top: 6px;
+        right: 7px;
+        transition: 0.4s;
+        z-index: 1;
+    }
+
+    input:checked~&__text:before {
+        content: 'on';
+        transform: translateX(-20px);
+    }
+
+    input:checked~&__checkmark {
+        @extend .tplBorder;
+    }
+
+    input:checked~&__radio {
+        @extend .tplBorder;
+    }
+
+    &__checkmark:after {
+        content: url('~assets/icons/check-off-icon.svg');
+        position: absolute;
+        bottom: 2px;
+        left: 5px;
+    }
+
+    &__radio:after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        background: $input-check-check;
+        top: 35%;
+        left: 35%;
+        width: 6px;
+        height: 6px;
+    }
+
+    input:checked~&__checkmark:after {
+        top: 4px;
+        left: -1px;
+        content: url('~assets/icons/check-on-icon.svg');
+    }
+
+    input:checked~&__radio:after {
+        background: $input-check-active-check;
+        box-shadow: $input-check-active-shadow;
+    }
+
+    .inputPaddingNoImg {
+        padding: 0 12px;
+    }
+
+    .labelPaddingNoImg {
+        left: 12px;
+    }
+
+    &__enter:focus~.labelPaddingNoImg {
+        top: 2px;
+        left: 12px;
+    }
+}
+
+.switch {
+    width: 44px;
+    height: 23px;
+}
+
+:host.ng-invalid.ng-dirty:not(:focus-within) {
+
+    & svg>path {
+        stroke: $input-field-error-text;
+    }
+
+    .input {
+        &__enter {
+            border-radius: 10px;
+            border: 2px solid $input-field-error-text;
+            color: $input-field-error-text;
+        }
+
+        &__invalid {
+            width: 100%;
+            margin-top: 2px;
+            position: absolute;
+            display: flex;
+            justify-content: flex-end;
+            scale: 1;
+            color: $input-field-error-text;
+
+            &:not(.input__password)::after {
+                position: absolute;
+                top: -37px;
+                right: 10px;
+                content: url('~assets/icons/warning-circle-icon.svg');
+            }
+        }
+    }
+}
+
+:host.ng-valid:not(:focus-within) {
+
+    & svg>path {
+        stroke: $input-field-success-border;
+    }
+}
+
+:host.ng-pristine.ng-untouched {
+
+    .input__invalid {
+        display: none;
+    }
+}

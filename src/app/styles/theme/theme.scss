@@ -1,0 +1,78 @@
+@use '../app-palette' as *;
+
+:root {
+    --start-page-background: linear-gradient(180deg, #27292e 0%, var(--app-neutral-900) 100%);
+    --page-background: var(--app-neutral-900);
+    --page-border: var(--app-primary-300);
+    --start-page-logo: var(--app-primary-500);
+    --page-title: var(--app-primary-0);
+    --page-sub-title: rgba(255, 255, 255, 0.45);
+    --page-text: var(--app-primary-0);
+    --page-circle: rgba(255, 255, 255, 0.25);
+    --blur-card-background: rgba(19, 20, 22, 0.06);
+    --payment-time: var(--app-neutral-600);
+    --payment-price: var(--app-alert-success);
+    --page-link: var(--app-primary-300);
+
+    --google-button-background: var(--app-primary-50);
+    --google-button-text: var(--app-neutral-900);
+
+    --card-border: #008efe;
+    --card-background: rgba(0, 142, 254, 0.2);
+    --card-type: rgba(255, 255, 255, 0.04);
+
+    --keyboard-border: var(--app-primary-300);
+    --keyboard-background: rgba(108, 235, 165, 0.04);
+    --keyboard-active-border: var(--app-primary-600);
+    --keyboard-active-background: rgba(108, 235, 165, 0.12);
+    --additional-key-background: none;
+    --additional-key-border: var(--app-primary-0);
+    --additional-key-content: var(--app-primary-0);
+
+    --button-primary-background: var(--app-primary-300);
+    --button-primary-shadow: -4px -4px 12px rgba(108, 235, 165, 0.1), 4px 4px 12px rgba(108, 235, 165, 0.1),
+        4px -4px 12px rgba(108, 235, 165, 0.1), -4px 4px 12px rgba(108, 235, 165, 0.1);
+    --button-primary-pressed: var(--app-primary-600);
+    --button-primary-text: var(--app-neutral-900);
+
+    --button-alert-shadow: -4px -4px 12px rgba(251, 117, 108, 0.1), 4px 4px 12px rgba(251, 117, 108, 0.1),
+        4px -4px 12px rgba(251, 117, 108, 0.1), -4px 4px 12px rgba(251, 117, 108, 0.1);
+
+    --button-secondary-basic-background: rgba(108, 235, 165, 0.04);
+    --button-secondary-alert-background: rgba(251, 117, 108, 0.04);
+    --button-secondary-pressed-background: rgba(108, 235, 165, 0.12);
+    --button-secondary-basic-border: var(--app-primary-300);
+    --button-secondary-pressed-border: var(--app-primary-600);
+    --button-text: var(--app-primary-300);
+    --button-error-text: var(--app-alert-error);
+    --button-pressed-text: var(--app-primary-600);
+    --button-text-shadow: drop-shadow(-4px -4px 12px rgba(108, 235, 165, 0.1))
+        drop-shadow(4px 4px 12px rgba(108, 235, 165, 0.1)) drop-shadow(4px -4px 12px rgba(108, 235, 165, 0.1))
+        drop-shadow(-4px 4px 12px rgba(108, 235, 165, 0.1));
+
+    --input-field-background: var(--app-font-table-header_2);
+    --input-field-default-border: var(--app-font-border_15);
+    --input-field-focus-border: var(--app-primary-300);
+    --input-field-error-border: var(--app-alert-error);
+    --input-field-success-border: var(--app-alert-success);
+    --input-field-blur-theme: rgba(41, 203, 144, 0.04);
+    --input-field-default-label: rgba(255, 255, 255, 0.45);
+    --input-field-text: var(--app-primary-0);
+    --input-field-error-text: var(--app-alert-error);
+
+    --input-check-background: rgba(255, 255, 255, 0.06);
+    --input-check-check: var(--app-neutral-900);
+    --input-check-active-border: var(--app-neutral-600);
+    --input-check-active-check: var(--app-primary-300);
+    --input-check-active-shadow: -1px 3px 4px rgba(108, 235, 165, 0.3);
+    --input-switch-text: rgba(255, 255, 255, 0.25);
+
+    --success: var(--app-primary-600);
+    --error: var(--app-alert-error);
+
+    --dropdown-select-shadow: -4px 4px 12px 0px rgba(108, 235, 165, 0.10), 4px -4px 12px 0px rgba(108, 235, 165, 0.10), 4px 4px 12px 0px rgba(108, 235, 165, 0.10), -4px -4px 12px 0px rgba(108, 235, 165, 0.10);
+
+    --data-picker-range: rgba(108, 235, 165, 0.2);
+    --data-picker-active: var(--app-primary-300);
+    --data-picker-td: var(--app-font-dividers_6);
+}

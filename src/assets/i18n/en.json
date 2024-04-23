@@ -1,0 +1,266 @@
+{
+    "mobile": {
+        "routes": {
+            "myaccount": "My account",
+            "language": "Language",
+            "maincurrency": "Main currency",
+            "notifications": "Notifications",
+            "security&safety": "Security & Safety",
+            "support": "Support",
+            "logout": "Log out"
+        }
+    },
+    "common": {
+        "submittext": "Submit",
+        "sendtext": "Send",
+        "confirmtext": "Confirm",
+        "canceltext": "Cancel",
+        "settext": "Set",
+        "started": "Get started",
+        "continue": "Continue",
+        "complete": "complete",
+        "skip": "Skip",
+        "close": "Close",
+        "filter": "Filter",
+        "save": "Save",
+        "apply": "Apply",
+        "name": "Name"
+    },
+    "auth": {
+        "resetpassword": "Reset password",
+        "newpasswordtip": "Please, enter a new password below.",
+        "confirmpassword": "Confirm new password",
+        "newpassword": "New password",
+        "inputerrortext": "Required field!",
+        "forgotpassword": "Forgot password?",
+        "forgotpasswordtext": "Don’t worry! It happens. Please enter the address associated with your account.",
+        "rememberpassword": "Remember your password?",
+        "signin": "Sign in",
+        "inputpassword": "Password",
+        "welcometitle": "Welcome to ShopTrack!",
+        "googlelogin": "Continue with Google",
+        "noaccount": "Don't have an account?",
+        "haveaccount": "Already have an account?",
+        "signup": "Sign up",
+        "resend": "Resend",
+        "pin":{
+            "title":"Enter PIN code", 
+            "text":"Enter the PIN code to enter your account"        
+        },
+        "confirmpin": {
+            "title": "Confirm your PIN code",
+            "subtitle": "Confirm your PIN code to secure your account",
+            "text": "Enter your PIN code to enter your account"
+        },
+        "registrationpin": {
+            "title": "Set up PIN code",
+            "subtitle": "Enter the PIN code to secure your account"
+        },
+        "registration": {
+            "consent": "Registrate as Administrator"
+        },
+        "successpass": {
+            "title": "New password confirmed successfully!",
+            "text": "You have successfully confirm your new password. Please, use your new password when logging in."
+        },
+        "resetpass": {
+            "resetpassword": "Reset password",
+            "emailsent": "Email has been sent",
+            "text": "Please check your inbox and click in the received link to reset a password",
+            "receivelink": "Didn’t receive the link?"
+        }
+    },
+    "homepage": {
+        "title": "Welcome to wallet-FE",
+        "registration": "Registration page",
+        "login": "Log page",
+        "remindpassword": "Remind password page",
+        "homepage": "Home Page",
+        "navigation": "Navigation links",
+        "seeall": "see all",
+        "lasttransactions": "Last transactions"
+    },
+    "language": {
+        "title": "Choose your language",
+        "ukrainian": "Ukrainian",
+        "english": "English"
+    },
+    "policy": {
+        "title": "Privacy Policy",
+        "text_1": "In sed tristique nisi malesuada tellus nisl diam. Vehicula duis non porttitor tristique pulvinar massa nulla et. Sem in diam elementum morbi commodo et tempus non. Pharetra urna placerat suspendisse ornare metus proin. At in dignissim ante varius arcu pellentesque viverra mauris integer. Quis nibh volutpat tellus cursus libero ultrices nulla fermentum. Augue ultrices turpis vitae ultrices turpis. Commodo aliquam venenatis arcu tortor ac tellus vitae. Ut aliquam laoreet consectetur a. Eget risus lacinia enim ut nibh molestie quisque consequat hendrerit.",
+        "text_2": "Tortor sit volutpat massa sit in lectus congue hac laoreet. Justo tincidunt gravida volutpat facilisis condimentum in arcu in id. Accumsan netus aliquam non imperdiet nibh integer at. Cras egestas gravida risus vel ac. Semper urna ac sit hendrerit in tellus.",
+        "text_3": "Cras in malesuada eget augue suspendisse turpis ridiculus tempus diam. Molestie sit quam placerat est. Diam non elit lacinia commodo lorem. Hendrerit purus elit diam laoreet vitae. Blandit urna cras vulputate in massa consequat. Leo eget pretium fermentum tellus id suspendisse donec. Malesuada et volutpat pharetra lectus morbi. Vivamus eu vitae nulla mus. Sodales libero cras mattis vitae tristique mauris. Id dictum metus sed neque. Enim metus elit nec tellus eu vel. Fringilla proin ut sed in tortor pharetra ante nisl sed. Tincidunt vulputate mauris amet dui rhoncus velit vivamus. Suspendisse sit commodo tristique risus a lacus ultrices ultricies rutrum. Sed sapien quis mattis nulla.",
+        "text_4": "Odio tincidunt sed tellus erat orci in purus amet purus. Enim aliquet quis interdum dui amet laoreet malesuada. Iaculis leo auctor ut enim lorem. Et cras suspendisse porttitor consequat at in. Etiam congue porttitor venenatis consectetur mi id. Dictum suscipit pretium amet dui consectetur id tortor. Fermentum sed a vulputate posuere amet diam morbi lectus. Purus sed commodo sed vitae vestibulum turpis diam. Venenatis at integer vel tincidunt blandit. Tellus risus amet metus eget semper imperdiet. Tincidunt enim eget pretium vulputate congue augue nunc purus. Pretium nulla ipsum at et pellentesque eu massa. Viverra adipiscing egestas quam et consequat viverra tincidunt. Ullamcorper nec ante eget quis risus vel id venenatis.",
+        "text_5": "Massa proin sagittis sit eget. Tellus quisque tortor ante consectetur bibendum mauris nulla. Velit fermentum nunc quisque sed eleifend et diam tristique sed. Et mattis tincidunt iaculis lectus sollicitudin a in. Id dolor nec morbi mauris rhoncus fringilla. Amet elit massa egestas suspendisse ultrices ultricies. Vitae et massa molestie eget ut enim egestas duis egestas. Magna amet posuere turpis sit tellus orci. Tellus venenatis diam id etiam nulla aliquet bibendum gravida neque. Quisque proin dui in condimentum. Ac ut nec mus egestas quis elementum vel dapibus. Ac blandit sodales proin et sagittis fames quisque odio tincidunt. Nunc ultrices est dolor ut sagittis eu non. Enim rutrum vel quis malesuada ultrices metus interdum. Justo sit pellentesque neque amet."
+    },
+    "createaccount": {
+        "text": "Create your payment account",
+        "buttontext": "Create new payment account",
+        "inputname": "Enter your account name",
+        "inputbalance": "Enter your account balance",
+        "inputcardnumber": "Enter your card number",
+        "inputdescription": "Enter your description",
+        "inputcurrency": "Enter your currency",
+        "inputtype": "Enter your accounts type"
+    },
+    "currency": {
+        "title": "Choose your main currency",
+        "text": "Your main currency should be one of the most commonly used ones. Your balance and statistics will be shown in this currency.",
+        "uah": "UAH (Hryvnia)",
+        "usd": "USD (Dollar)",
+        "eur": "EUR (Euro)",
+        "gbp": "GBP (Pound Sterling)",
+        "pln": "PLN (Złoty)"
+    },
+    "transactions": {
+        "allaccounts": "All accounts",
+        "notransactionsfound": "No transactions found",
+        "add": {
+            "amount": "Amount",
+            "addtransaction": "Add transaction",
+            "title": "Add Transaction",
+            "accounts": "Accounts",
+            "category": "Category",
+            "subcategory": "Subcategory"
+        },
+        "filter": {
+            "expenses": "Expenses",
+            "incomes": "Incomes"
+        }
+    },
+    "strategy": {
+        "startdate": "Start date",
+        "enddate": "End date",
+        "duedate": "Due date",
+        "amount": "Amount",
+        "routes": {
+            "goals": "Goals",
+            "budgets": "Budgets",
+            "debts": "Debts",
+            "required expenses": "Required expenses"
+        },
+        "budget": {
+            "title": "Budgets",
+            "empty": "You don't have any set budget yet",
+            "button": "Set new budget",
+            "budgetname": "Food",
+            "accountstitle": "All accounts",
+            "accounts": {
+                "default": "Accounts"
+            },
+            "categories": {
+                "title": "All categories",
+                "default": "Categories",
+                "spent": "spent",
+                "firstdate": "27 Mar, 2023",
+                "lastdate": "20 Apr, 2024",
+                "transactions": "Transactions"
+            },
+            "new": {
+                "title": "New budget",
+                "nameinput": "Enter budget name",
+                "currency": "Currency",
+                "button": "Set new budget",
+                "period": "Period",
+                "budgetname": "Budget name",
+                "budgetamount": "Budget amount"
+            }
+        },
+        "debts": {
+            "title": "Debts",
+            "empty": "You don't have any debt yet",
+            "button": "Create new debt",
+            "modal": {
+                "Lent": "Lent",
+                "Borrowed": "Borrowed"
+            },
+            "info": {
+                "repaid": "repaid",
+                "repaidbutton": "Repaid",
+                "createnewtype": "Create new type",
+                "type": "Types",
+                "transaction": "Transactions"
+            },
+            "add": {
+                "button": "Add debt",
+                "selectdate": "Select date",
+                "enddate": "End date",
+                "borrowerinput": "Enter your borrower name",
+                "lenderinput": "Enter your lender name",
+                "amount": "Amount",
+                "type": "Type"
+            },
+            "edit": {
+                "amountdue": "Amount due",
+                "title": "Debtor edit",
+                "deletetext": "Delete debtor",
+                "account": "Account"
+            },
+            "type": {
+                "title": "Debt edit type",
+                "deletetype": "Delete type"
+            }
+        },
+        "goals": {
+            "title": "Goals",
+            "empty": "You don't have any created goals yet",
+            "footertext": "Create new goal",
+            "transaction": "Transaction",
+            "new": {
+                "title": "New goal",
+                "footer": "Create new goal"
+            },
+            "edit": {
+                "title": "Goal editing",
+                "delete": "Delete goal"
+            }
+        },
+        "expenses": {
+            "title": "Required expenses",
+            "empty": "You don't have any required expenses yet",
+            "button": "Create new required exense",
+            "new": {
+                "title": "Required expense",
+                "nameinput": "Enter required expense name",
+                "paymentrepeat": "Payment repeating"
+            },
+            "repeatpayments": {
+                "notrepeated": "Not repeated",
+                "everyweek": "Every week",
+                "everymonth": "Every month",
+                "everyyear": "Every year",
+                "customrange": "Custom range"
+            }
+        }
+    },
+    "shared": {
+        "mycards": "My Cards",
+        "loading": "Loading...",
+        "apply": "Apply",
+        "totalbalance": "Total balance",
+        "spendingreview": "Spending review",
+        "pagenotfound": "Page not found",
+        "deletemodal": {
+            "delete": "Delete",
+            "question": "Are you sure you want to delete",
+            "warning": "You can’t undo this action.",
+            "confirm": "Yes, delete"
+        },
+        "expensepicker": {
+            "expense": "Expense",
+            "income": "Income"
+        },
+        "sidebar": {
+            "applogo": "app logo",
+            "logout": "Log out"
+        },
+        "goalstate": {
+            "nameinput": "Goal name",
+            "nameinputplaceholder": "Enter goal name",
+            "amountinput": "Goal amount",
+            "currencyinput": "Currency",
+            "balanceinput": "Goal balance",
+            "dateinput": "End date"
+        }
+    }
+}

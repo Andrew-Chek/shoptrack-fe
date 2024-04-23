@@ -1,0 +1,12 @@
+<label class="input" [ngClass]="{ input: true }">
+    <input
+        (change)="updateValue()"
+        [ngClass]="{ input__check: true }"
+        [type]="inputType"
+        required="required"
+        [name]="inputName"
+        [placeholder]="inputLabel"
+    />
+
+    <span class="svgContainer"> <svg-icon [src]="checkIcon" [ngClass]="{unchecked: !InnerValue}" [svgClass]="'icon'"></svg-icon></span>
+</label>

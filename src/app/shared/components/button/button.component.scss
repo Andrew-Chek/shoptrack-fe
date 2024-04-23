@@ -1,0 +1,171 @@
+@use '../../../styles/theme/theme-variables.scss' as *;
+
+.btn {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12px;
+
+    &__icon-left,
+    &__icon-right {
+        height: 22px;
+        margin-right: 10px;
+    }
+
+    &__icon-right {
+        margin-left: 10px;
+    }
+
+    &__primary {
+        background: $button-primary-background;
+        border: none;
+        border-radius: 8px;
+        color: $button-primary-text;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: $button-primary-shadow;
+
+        &:active {
+            background: $button-primary-pressed;
+        }
+
+        &:disabled {
+            background: $button-primary-background;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    &__alert {
+        background: $app-alert-error;
+        border: none;
+        border-radius: 8px;
+        color: $button-primary-text;
+        font-weight: 700;
+        font-size: 16px;
+        box-shadow: $button-alert-shadow;
+
+        &:active {
+            background: $app-alert-warning;
+        }
+
+        &__secondary {
+            background: $button-secondary-alert-background;
+            border-radius: 8px;
+            border: 1px solid $app-alert-error;
+            color: $app-alert-error;
+            font-weight: 700;
+            font-size: 16px;
+
+            &:active {
+                border: 1px solid $app-alert-warning;
+                color: $app-alert-warning;
+            }
+        }
+    }
+
+    &__secondary {
+        background: $button-secondary-basic-background;
+        border-radius: 8px;
+        border: 1px solid $button-secondary-basic-border;
+        color: $button-text;
+        font-weight: 700;
+        font-size: 16px;
+
+        &:active {
+            border: 1px solid $button-secondary-pressed-border;
+            color: $button-pressed-text;
+        }
+
+        &:disabled {
+            border: 1px solid $button-secondary-basic-border;
+            color: $button-text;
+            opacity: 0.5;
+        }
+
+        .load {
+            color: $button-text;
+        }
+    }
+
+    &__flat {
+        border: none;
+        color: $button-text;
+        background: none;
+        font-weight: 700;
+        font-size: 16px;
+        border-radius: 8px;
+
+        &:active {
+            color: $button-text;
+        }
+
+        &:disabled {
+            color: $button-text;
+            opacity: 0.5;
+        }
+
+        .load {
+            color: $button-text;
+        }
+    }
+
+    &__loading {
+        background: $app-primary-300;
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.load,
+.load:before,
+.load:after {
+    border-radius: 50%;
+    width: 1em;
+    top: -7px;
+    height: 1em;
+    animation-fill-mode: both;
+    animation: load7 1.8s infinite ease-in-out;
+}
+
+.load {
+    color: $button-primary-text;
+    font-size: 10px;
+    margin: 7px auto;
+    position: relative;
+    text-indent: -9999em;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+.load:before,
+.load:after {
+    content: '';
+    position: absolute;
+    top: 0;
+}
+.load:before {
+    left: -2em;
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+.load:after {
+    left: 2em;
+}
+
+@keyframes load7 {
+    0%,
+    80%,
+    100% {
+        box-shadow: 0 0.5em 0 -1em;
+    }
+    40% {
+        box-shadow: 0 1em 0 0;
+    }
+}

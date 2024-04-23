@@ -1,0 +1,24 @@
+<button
+    [ngClass]="{
+        btn__primary: buttonTheme === primaryButton,
+        btn__secondary: buttonTheme === secondaryButton,
+        btn__flat: buttonTheme === flatButton,
+        btn__alert: buttonTheme === alertButton,
+        btn__alert__secondary: buttonTheme === alertSecondaryButton,
+        btn__loading: isLoading
+    }"
+    class="btn"
+    [type]="buttonType"
+    [disabled]="buttonDisabled"
+>
+    <ng-container *ngIf="buttonIconLeft"
+        ><svg-icon class="btn__icon-left" [src]="buttonIconLeft"></svg-icon
+    ></ng-container>
+    <span *ngIf="!isLoading">{{ buttonText }}</span>
+    <span *ngIf="isLoading"
+        ><div class="load">{{ 'shared.loading' | translate }}</div></span
+    >
+    <ng-container *ngIf="buttonIconRight"
+        ><svg-icon class="btn__icon-right" [src]="buttonIconRight"></svg-icon
+    ></ng-container>
+</button>

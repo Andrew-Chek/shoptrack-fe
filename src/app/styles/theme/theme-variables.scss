@@ -1,0 +1,111 @@
+@import 'theme';
+
+$start-page-background: var(--start-page-background);
+$page-background: var(--page-background);
+$page-border: var(--page-border);
+$start-page-logo: var(--start-page-logo);
+$page-title: var(--page-title);
+$page-sub-title: var(--page-sub-title);
+$page-text: var(--page-text);
+$page-circle: var(--page-circle);
+$blur-card-background: var(--blur-card-background);
+$payment-time: var(--payment-time);
+$payment-price: var(--payment-price);
+$page-link: var(--page-link);
+
+$google-button-background: var(--google-button-background);
+$google-button-text: var(--google-button-text);
+
+$card-border: var(--card-border);
+$card-background: var(--card-background);
+$card-type: var(--card-type);
+
+$keyboard-border: var(--keyboard-border);
+$keyboard-background: var(--keyboard-background);
+$keyboard-active-border: var(--keyboard-active-border);
+$keyboard-active-background: var(--keyboard-active-background);
+$additional-key-background: var(--additional-key-background);
+$additional-key-border: var(--additional-key-border);
+$additional-key-content: var(--additional-key-content);
+
+$button-primary-background: var(--button-primary-background);
+$button-primary-shadow: var(--button-primary-shadow);
+$button-primary-pressed: var(--button-primary-pressed);
+$button-primary-text: var(--button-primary-text);
+
+$button-alert-shadow: var(--button-alert-shadow);
+
+$button-secondary-basic-background: var(--button-secondary-basic-background);
+$button-secondary-alert-background: var(--button-secondary-alert-background);
+$button-secondary-pressed-background: var(--button-secondary-pressed-background);
+$button-secondary-basic-border: var(--button-secondary-basic-border);
+$button-secondary-pressed-border: var(--button-secondary-pressed-border);
+$button-text: var(--button-text);
+$button-pressed-text: var(--button-pressed-text);
+$button-text-shadow: var(--button-text-shadow);
+
+$input-field-background: var(--input-field-background);
+$input-field-default-border: var(--input-field-default-border);
+$input-field-focus-border: var(--input-field-focus-border);
+$input-field-error-border: var(--input-field-error-border);
+$input-field-success-border: var(--input-field-success-border);
+
+$input-field-default-label: var(--input-field-default-label);
+$input-field-text: var(--input-field-text);
+$input-field-error-text: var(--input-field-error-text);
+
+$input-check-background: var(--input-check-background);
+$input-check-check: var(--input-check-check);
+$input-check-active-border: var(--input-check-active-border);
+$input-check-active-check: var(--input-check-active-check);
+$input-check-active-shadow: var(--input-check-active-shadow);
+$input-switch-text: var(--input-switch-text);
+
+$input-field-blur-theme: var(--input-field-blur-theme);
+
+$success: var(--success);
+$error: var(--error);
+
+$dropdown-select-shadow: var(--dropdown-select-shadow);
+
+$data-picker-range: var(--data-picker-range);
+$data-picker-active: var(--data-picker-active);
+$data-picker-td: var(--data-picker-td);
+
+$app-primary-900: var(--app-primary-900);
+$app-primary-800: var(--app-primary-800);
+$app-primary-700: var(--app-primary-700);
+$app-primary-600: var(--app-primary-600);
+$app-primary-500: var(--app-primary-500);
+$app-primary-400: var(--app-primary-400);
+$app-primary-300: var(--app-primary-300);
+$app-primary-200: var(--app-primary-200);
+$app-primary-100: var(--app-primary-100);
+$app-primary-50: var(--app-primary-50);
+$app-primary-0: var(--app-primary-0);
+
+$app-neutral-900: var(--app-neutral-900);
+$app-neutral-800: var(--app-neutral-800);
+$app-neutral-700: var(--app-neutral-700);
+$app-neutral-600: var(--app-neutral-600);
+$app-neutral-500: var(--app-neutral-500);
+$app-neutral-400: var(--app-neutral-400);
+$app-neutral-300: var(--app-neutral-300);
+$app-neutral-200: var(--app-neutral-200);
+$app-neutral-100: var(--app-neutral-100);
+$app-neutral-50: var(--app-neutral-50);
+
+$app-font-white: var(--app-font-white);
+$app-font-title_85: var(--app-font-title_85);
+$app-font-primary_65: var(--app-font-primary_65);
+$app-font-secondary_45: var(--app-font-secondary_45);
+$app-font-disable_25: var(--app-font-disable_25);
+$app-font-border_15: var(--app-font-border_15);
+$app-font-dividers_6: var(--app-font-dividers_6);
+$app-font-background_4: var(--app-font-background_4);
+$app-font-table-header_2: var(--app-font-table-header_2);
+
+$app-alert-success: var(--app-alert-success);
+$app-alert-error: var(--app-alert-error);
+$app-alert-warning: var(--app-alert-warning);
+$app-alert-info: var(--app-alert-info);

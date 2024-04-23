@@ -1,0 +1,59 @@
+<div class="registration">
+    <form [formGroup]="signUpService.signUpForm" (ngSubmit)="onSubmit()" class="registration__form">
+        <div class="registration__title">{{ 'auth.signup' | translate }}</div>
+        <div class="registration__filed">
+            <app-input
+                formControlName="username"
+                class="registration__firstFiled"
+                [inputStyle]="textInput"
+                [inputType]="textType"
+                [inputIcon]="inputIconAt"
+                [inputPlaceholder]="inputTextUsername"
+                [inputValid]="signUpService.isValidUsername"
+                [inputErrorMessage]="(signUpService.usernameErrorMessage$ | async) || ''"
+            ></app-input>
+            <app-input
+                formControlName="email"
+                class="registration__firstFiled"
+                [inputStyle]="textInput"
+                [inputType]="textType"
+                [inputIcon]="inputIconAt"
+                [inputPlaceholder]="inputTextEmail"
+                [inputValid]="signUpService.isValidEmail"
+                [inputErrorMessage]="(signUpService.emailErrorMessage$ | async) || ''"
+            ></app-input>
+            <app-input
+                formControlName="password"
+                [inputStyle]="textInput"
+                [inputType]="passwordType"
+                [inputIcon]="inputIconLock"
+                [inputPlaceholder]="'auth.inputpassword' | translate"
+                [inputValid]="signUpService.isValidPassword"
+                [inputErrorMessage]="(signUpService.passwordErrorMessage$ | async) || ''"
+            ></app-input>
+        </div>
+        <div class="registration__confirm">
+            <app-checkbox
+                formControlName="checkBox"
+                [inputStyle]="checkInput"
+                [inputType]="checkType"
+                class="sign-up__check"
+                (valueChange)="signUpService.onCheckBoxChange($event)"
+            ></app-checkbox>
+            <p class="registration__info">
+                {{ 'auth.registration.consent' | translate }}
+            </p>
+        </div>
+        <app-button
+            [buttonTheme]="primaryButton"
+            [buttonText]="'auth.signup' | translate"
+            [buttonType]="buttonType"
+            [buttonDisabled]="signUpService.isValidForm"
+            [isLoading]="isLoadingSignUpButton"
+        ></app-button>
+    </form>
+    <div class="registration__login">
+        {{ 'auth.haveaccount' | translate }}
+        <a class="registration__loginHref" (click)="redirectToLoginPage()">{{ 'auth.signin' | translate }}</a>
+    </div>
+</div>

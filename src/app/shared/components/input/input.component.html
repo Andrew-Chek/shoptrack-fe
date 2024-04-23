@@ -1,0 +1,93 @@
+<div>
+    <label class="input-label">{{ inputLabel }}</label>
+    <label
+        class="input"
+        [ngClass]="{
+            switch: inputStyle === inputSwitch,
+        }"
+    >
+        <svg-icon
+            [src]="inputIcon!"
+            [ngClass]="{
+                input__ico: inputStyle === inputText,
+                input__checkIco: inputStyle === inputRadio
+            }"
+        ></svg-icon>
+
+        <input
+            *ngIf="!isTypeNumber"
+            #input
+            (input)="onInputValueChange($event)"
+            [ngClass]="{
+                input__enter: inputStyle === inputText,
+                input__check: inputStyle !== inputText,
+                input__valid_filed: inputValid,
+                input__invalid_filed: inputValid === false,
+                inputPaddingNoImg: !hasInputIcon
+            }"
+            [type]="inputType"
+            required="required"
+            [name]="inputName"
+            [placeholder]="inputPlaceholder"
+            [value]="inputValue"
+            [disabled]="inputDisabled"
+            [checked]="checkboxChecked"
+        />
+
+        <input
+            *ngIf="isTypeNumber"
+            [type]="type.text"
+            #input
+            (input)="updateAmountControl()"
+            [ngClass]="{
+                input__enter: inputStyle === inputText,
+                input__check: inputStyle !== inputText,
+                input__valid_filed: inputValid,
+                input__invalid_filed: inputValid === false,
+                inputPaddingNoImg: !hasInputIcon
+            }"
+            required="required"
+            [placeholder]="inputPlaceholder"
+            [(ngModel)]="value"
+            [disabled]="inputDisabled"
+        />
+
+        <span [class.input__text]="inputStyle === inputSwitch"></span>
+        <span
+            [ngClass]="{
+                input__label: inputStyle === inputText && showPlaceholder,
+                input__not_label: inputStyle === inputText && !showPlaceholder,
+                input__checkLabel: inputStyle !== inputText,
+                labelPaddingNoImg: !hasInputIcon
+            }"
+            >{{ inputPlaceholder }}</span
+        >
+        <span
+            [ngClass]="{
+                input__valid: inputValid,
+                input__invalid: !inputValid,
+                input__password: password === 'password'
+            }"
+            >{{ inputErrorMessage }}</span
+        >
+
+        <svg-icon
+            (click)="toggleEyeIcon()"
+            [src]="iconSrc"
+            *ngIf="eyeIcon$ | async as iconSrc"
+            id="eyeIcon"
+            [ngClass]="{
+                input__show: password === 'password',
+                input__off_show: password !== 'password',
+            }"
+        ></svg-icon>
+
+        <span
+            [ngClass]="{
+                input__radio: inputStyle === inputRadio,
+                input__checkmark: inputStyle === inputCheck,
+                input__slider: inputStyle === inputSwitch
+            }"
+        ></span>
+    </label>
+</div>

@@ -1,0 +1,112 @@
+@use '../../../styles/theme/theme-variables' as *;
+
+.sign-in {
+    width: 90%;
+    height: 100vh;
+    margin: 0 auto;
+
+    &__container {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &__title {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 150%;
+        color: $page-title;
+        margin-bottom: 24px;
+        text-align: center;
+        margin-top: 32px;
+    }
+
+    &__button {
+        display: block;
+        margin-top: 24px;
+        margin-bottom: 20px;
+    }
+
+    &__input {
+        display: block;
+        margin-top: 10px;
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    &__separator {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 130%;
+        color: $page-sub-title;
+    }
+
+    &__google-button {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 44px;
+        gap: 8px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 150%;
+        text-align: left;
+        color: $google-button-text;
+        background: $google-button-background;
+        border-radius: 8px;
+        border: none;
+        margin-bottom: 26px;
+
+        img {
+            padding: 0 22px;
+        }
+    }
+
+    &__signup {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        margin-bottom: 18px;
+
+        &__title {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 130%;
+            text-align: center;
+            color: $page-sub-title;
+            margin-right: 12px;
+        }
+
+        &__link {
+            text-decoration: none;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 150%;
+            color: $page-link;
+        }
+    }
+
+    &__forget-password, &__back, &__reset-password {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 150%;
+        color: $page-link;
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,45 @@
+<div class="sign-in">
+    <form [formGroup]="signInService.signInForm" (ngSubmit)="onSubmit()" class="sign-in__form">
+        <div class="sign-in__title">{{ 'auth.welcometitle' | translate }}</div>
+        <app-input
+            formControlName="username" 
+            class="sign-in__input"
+            [inputIcon]="inputIconAt"
+            [inputStyle]="textInput"
+            [inputType]="textType"
+            [inputPlaceholder]="inputTextUsername"
+            [inputValid]="signInService.isValidUsername"
+            [inputErrorMessage]="(signInService.usernameErrorMessage$ | async)!"
+        ></app-input>
+
+        <app-input
+            formControlName="password"
+            class="sign-in__input"
+            [inputIcon]="inputIconLock"
+            [inputStyle]="textInput"
+            [inputType]="passwordType"
+            [inputPlaceholder]="'auth.inputpassword' | translate"
+            [inputValid]="signInService.isValidPassword"
+            [inputErrorMessage]="(signInService.passwordErrorMessage$ | async)!"
+        ></app-input>
+
+        <app-button
+            [buttonTheme]="primaryButton"
+            [buttonText]="'auth.signin' | translate"
+            [buttonType]="buttonType"
+            [buttonDisabled]="signInService.isValidForm"
+            [isLoading]="isLoadingButton$ | async"
+            class="sign-in__button"
+        ></app-button>
+    </form>
+    <div class="sign-in__signup">
+        <div class="sign-in__signup__title">{{ 'auth.noaccount' | translate }}</div>
+        <a class="sign-in__signup__link" (click)="redirectToRegistrationPage()">{{ 'auth.signup' | translate }}</a>
+    </div>
+    <a class="sign-in__forget-password" (click)="redirectToForgotPasswordPage()">{{
+        'auth.forgotpassword' | translate
+    }}</a>
+    <a class="sign-in__back" (click)="redirectToHomePage()">{{
+        'homepage.homepage' | translate
+    }}</a>
+</div>

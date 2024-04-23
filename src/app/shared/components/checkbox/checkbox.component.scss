@@ -1,0 +1,82 @@
+@use '../../../styles/theme/theme-variables.scss' as *;
+
+:host {
+    display: block;
+    width: 100%;
+}
+
+.tplInput {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    min-height: 24px;
+    height: fit-content;
+    width: 100%;
+    font-family: Ubuntu-Medium, sans-serif;
+}
+
+.input {
+    @extend .tplInput;
+    font-size: 14px;
+    -webkit-text-size-adjust: none;
+
+    &__check {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+}
+
+.svgContainer {
+    pointer-events: none;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #27292e;
+    box-shadow: 0 0 0 0 rgba(#6ceba5, .5);
+}
+
+.icon {
+    width: 13px;
+    height: 10px;
+}
+
+
+:host.ng-valid {
+
+    .svgContainer {
+        box-shadow: 1px -1px 0px rgba(150, 150, 150, 0.5), -1px -1px 0px rgba(150, 150, 150, 0.5);
+    }
+
+    .icon {
+        & :is(svg>path) {
+            fill: $input-check-active-check;
+        }
+    }
+}
+
+.unchecked {
+    .icon {
+        & :is(svg>path) {
+            fill: $app-neutral-900;
+        }
+    }
+
+}
+
+.input__check.glow:not(:checked)+.svgContainer {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    70% {
+        box-shadow: 0 0 0 12px rgba(#6ceba5, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(#6ceba5, 0);
+    }
+}
