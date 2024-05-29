@@ -24,7 +24,6 @@ export class SignInComponent implements OnInit, OnDestroy {
     public readonly inputTextUsername = 'Username';
     public readonly inputIconAt = IconEnum.EmailIcon;
     public readonly inputIconLock = IconEnum.LockInputIcon;
-    public readonly buttonIconLeft = IconEnum.GoogleIcon;
 
     public isLoadingButton$ = this.signInService.isLoadingLoginButton$;
 

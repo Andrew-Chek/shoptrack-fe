@@ -18,7 +18,7 @@ export class HomePage {
 
     enterAsGuest() {
         localStorage.setItem('guest', 'true');
-        this.router.navigate([routes.home, routes.auth, routes.guest]);
+        this.router.navigate([routes.home, routes.features, routes.guest]);
     }
 
     moveToSignin() {

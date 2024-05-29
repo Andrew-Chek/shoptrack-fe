@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Add Shopping List</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+    <ion-item>
+        <ion-label position="floating">List Name</ion-label>
+        <ion-input [(ngModel)]="listName"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input [(ngModel)]="listDescription"></ion-input>
+    </ion-item>
+    <ion-button expand="full" (click)="addList()">Add List</ion-button>
+</ion-content>
+  

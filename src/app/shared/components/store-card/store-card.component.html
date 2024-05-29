@@ -1,0 +1,18 @@
+<ion-card class="store">
+    <div class="store-info">
+        <ion-card-content 
+            class="store-address"
+            (click)="goToStorePage()"
+        >
+                {{ store.address }}
+        </ion-card-content>
+        <svg-icon
+            class="store-icon"
+            [src]="editIcon"
+            (click)="openEditDialog()"
+            [hidden]="!isAdmin"
+        >
+        </svg-icon>
+    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17093.567788168126!2d30.49348185056919!3d50.441583937372336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce86098b6587%3A0x266d22c2cee60d05!2z0JDQotCRLdCc0LDRgNC60LXRgg!5e0!3m2!1suk!2sua!4v1715603453839!5m2!1suk!2sua" width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</ion-card>

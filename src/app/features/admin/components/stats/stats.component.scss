@@ -1,0 +1,36 @@
+:host {
+    display: block;
+    height: 100%;
+}
+  
+ion-header {
+    --background: #35373c;
+    --color: var(--ion-color-light);
+}
+  
+ion-toolbar {
+    --background: #35373c;
+    color: #fff;
+}
+  
+ion-content {
+    --background: #35373c;
+    padding: 1rem;
+}
+  
+ion-item {
+    --background: #35373c;
+    --color: #fff;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+}
+  
+ion-button {
+    --background: var(--ion-color-primary);
+    --border-radius: 8px;
+    --padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+  

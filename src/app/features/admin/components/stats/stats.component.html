@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Admin Statistics</ion-title>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+    <ion-item>
+        <ion-label>Import Data</ion-label>
+        <input type="file" (change)="importData($event)" />
+    </ion-item>
+  
+    <ion-item>
+        <ion-label>Choose Chart Type</ion-label>
+        <ion-select [(ngModel)]="selectedChartType">
+            <ion-select-option *ngFor="let type of chartTypes" [value]="type">{{ type }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+  
+    <ion-item>
+        <ion-label>Choose Theme</ion-label>
+        <ion-select [(ngModel)]="selectedTheme">
+            <ion-select-option *ngFor="let theme of themes" [value]="theme">{{ theme }}</ion-select-option>
+        </ion-select>
+    </ion-item>
+  
+    <ion-button expand="full" (click)="generateChart()">Generate Chart</ion-button>
+  
+    <!-- <ngx-charts-bar-vertical
+      *ngIf="selectedChartType === 'vertical bar'"
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="chartData"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel">
+    </ngx-charts-bar-vertical> --> -->
+  
+    <!-- Add other chart types similarly
+  
+</ion-content>
+  

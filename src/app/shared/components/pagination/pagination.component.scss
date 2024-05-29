@@ -1,0 +1,26 @@
+.pagination {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    
+    &__button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 36px;
+        margin: 0 10px;
+        cursor: pointer;
+        
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    
+    &__page-number {
+        font-size: 24px;
+    }
+  }
+  

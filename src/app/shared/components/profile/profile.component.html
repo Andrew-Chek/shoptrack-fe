@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar>
+        <section class="profile__header">
+            <ion-title>User Profile</ion-title>
+            <svg-icon 
+                class="header-icon" 
+                [src]="backIcon" 
+                (click)="goBack()">
+            </svg-icon>
+        </section>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content class="profile__content">
+    <div class="profile__body">
+        <div class="profile__field">
+            <label>ID:</label>
+            <span>{{ user.userId }}</span>
+        </div>
+        <div class="profile__field">
+            <label>Username:</label>
+            <span>{{ user.username }}</span>
+        </div>
+        <div class="profile__field">
+            <label>Email:</label>
+            <span>{{ user.email }}</span>
+        </div>
+        <div class="profile__field">
+            <label>Role:</label>
+            <span>{{ user.role }}</span>
+        </div>
+    </div>
+</ion-content>
+  

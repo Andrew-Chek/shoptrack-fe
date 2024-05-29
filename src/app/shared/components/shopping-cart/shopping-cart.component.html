@@ -1,0 +1,30 @@
+<div class="shopping-cart">
+    <ion-header class="shopping-cart__header">
+        <ion-toolbar>
+            <div class="shopping-cart__toolbar">
+                <ion-title>Shopping Cart</ion-title>
+                <svg-icon
+                    class="shopping-cart__close-icon"
+                    [src]="closeIcon" 
+                    (click)="closeDialog()">
+                </svg-icon>
+            </div>
+        </ion-toolbar>
+    </ion-header>
+    
+    <ion-content class="shopping-cart__content">
+        <ion-list class="shopping-cart__list">
+            <ion-item *ngFor="let productInfo of productValues" class="shopping-cart__item">
+                <div class="shopping-cart__item-details">
+                    <p class="shopping-cart__item-name">{{ productInfo.product.name }}</p>
+                    <p class="shopping-cart__item-price">{{ productInfo.product.price }} UAH</p>
+                    <p class="shopping-cart__item-quantity">Quantity: {{ productInfo.quantity }}</p>
+                </div>
+            </ion-item>
+        </ion-list>
+        
+        <div class="shopping-cart__total">
+            <p>Total: {{ getTotalPrice() }}</p>
+        </div>
+    </ion-content>
+</div>

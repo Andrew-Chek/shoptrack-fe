@@ -17,6 +17,7 @@ import { IonicModule } from '@ionic/angular';
 import { AuthService } from './core/api/auth.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @NgModule({
     declarations: [AppComponent],
@@ -45,6 +46,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
     providers: [
         AuthService,
+        DialogService,
+        DynamicDialogConfig
     ],
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

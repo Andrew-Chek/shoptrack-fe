@@ -1,0 +1,52 @@
+<ion-header class="store__header">
+    <ion-toolbar>
+        <div class="store__header-bar">
+            <ion-title>
+                {{ storeName }}
+            </ion-title>
+            <div>
+                <svg-icon 
+                    class="header-icon" 
+                    [src]="backIcon" 
+                    (click)="goBack()">
+                </svg-icon>
+                <svg-icon
+                    [hidden]="!isAdmin"
+                    class="header-icon"
+                    [src]="addProductIcon"
+                    (click)="openProductDialog()">
+                </svg-icon>
+                <svg-icon 
+                    [hidden]="isAdmin"
+                    class="header-icon" 
+                    [src]="cartIcon" 
+                    (click)="isGuest ? openCart() : openLists()">
+                </svg-icon>
+            </div>
+        </div>
+    </ion-toolbar>
+  </ion-header>
+  
+<ion-content class="store__content">
+    <div class="store__search">
+        <input type="text" (input)="searchProducts()" placeholder="Search products..." />
+    </div>
+    
+    <ion-list class="store__products-list">
+        <app-product-card 
+            *ngFor="let product of filteredProducts"
+            class="products-list__item"
+            [product]="product"
+            [store]="store"
+            [isAdmin]="isAdmin"
+        >
+        </app-product-card>
+    </ion-list>
+
+    <app-pagination
+        class="store__products-pagination"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
+</ion-content>

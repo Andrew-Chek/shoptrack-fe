@@ -1,0 +1,14 @@
+<ion-card class="product-card">
+    <img src="../../../../assets/images/product-test.png" alt="{{ product.name }}" class="product-card__image" />
+    <ion-card-header class="product-card__header">
+        {{ product.name }}
+    </ion-card-header>
+    <ion-card-content class="product-card__content">
+        {{ product.description }}
+    </ion-card-content>
+    <ion-card-content class="product-card__content cart-content">
+        <p class="cart-price">Price: {{ product.price }} UAH</p>
+        <svg-icon [hidden]="isAdmin" class="cart-icon" [src]="addToCartIcon" (click)="addToCart()"></svg-icon>
+        <svg-icon [hidden]="!isAdmin" class="cart-icon" [src]="editIcon" (click)="openEditDialog()"></svg-icon>
+    </ion-card-content>
+</ion-card>

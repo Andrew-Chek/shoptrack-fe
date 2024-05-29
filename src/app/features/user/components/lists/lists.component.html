@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar>
+        <div class="lists-toolbar">
+            <ion-title>Shopping Lists</ion-title>
+            <svg-icon 
+                class="header-icon" 
+                [src]="backIcon" 
+                (click)="goBack()">
+            </svg-icon>
+        </div>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content>
+    <ion-item>
+        <ion-label>Show Archived</ion-label>
+        <ion-checkbox [(ngModel)]="showArchived" (ionChange)="filterLists()"></ion-checkbox>
+    </ion-item>
+    <ion-list>
+        <ion-item *ngFor="let list of shoppingLists">
+            <ion-label>{{ list.listInfo.name }}</ion-label>
+            <ion-button fill="outline" (click)="calculateTotal(list)">Calculate Total</ion-button>
+            <ion-button fill="outline" (click)="archiveList(list)">Archive</ion-button>
+            <ion-button fill="outline" (click)="openEditListDialog(list.listInfo)">Edit</ion-button>
+        </ion-item>
+    </ion-list>
+    <ion-fab class="lists-add" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="openAddListDialog()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

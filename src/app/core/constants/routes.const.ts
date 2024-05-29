@@ -4,10 +4,17 @@ export const routes = {
     auth: 'auth',
     signin: 'sign-in',
     signup: 'sign-up',
-    guest: 'guest',
     home: 'home',
 
     features: 'features',
     user: 'user',
     admin: 'admin',
+    guest: 'guest',
+
+    profile: 'profile',
+    store: 'store',
+    storePage: 'store-page',
+    storeAddresses: 'store-addresses',
+    lists: 'lists',
+    stats: 'stats',
 }

@@ -1,0 +1,51 @@
+<ion-header class="stores-page__header">
+    <ion-toolbar>
+        <div class="stores-page__header-bar">
+            <ion-title>
+                {{ storeName }}
+            </ion-title>
+            <div>
+                <svg-icon 
+                    [ngClass]="{ hidden: !isAdmin }"
+                    class="header-icon" 
+                    [src]="homeIcon" 
+                    (click)="goHome()">
+                </svg-icon>
+                <svg-icon 
+                    [ngClass]="{ hidden: !isAdmin }"
+                    class="header-icon" 
+                    [src]="addIcon" 
+                    (click)="openStoreDialog()">
+                </svg-icon>
+                <svg-icon 
+                    [ngClass]="{ hidden: isAdmin }"
+                    class="header-icon" 
+                    [src]="backIcon" 
+                    (click)="goBack()">
+                </svg-icon>
+                <svg-icon 
+                    class="header-icon"
+                    [ngClass]="{ hidden: isAdmin }"
+                    [src]="cartIcon" 
+                    (click)="isGuest ? openCart() : openLists()">
+                </svg-icon>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content class="stores-page__content">
+    <ion-list class="stores-list">
+        <app-store-card *ngFor="let store of mockStores" 
+            class="stores-list__item" 
+            [store]="store"
+            [isAdmin]="isAdmin"
+            (goneToStorePage)="goToStorePage(store)">
+        </app-store-card>
+    </ion-list>
+    <app-pagination
+        class="stores-page__pagination"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+    ></app-pagination>
+</ion-content>

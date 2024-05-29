@@ -1,0 +1,40 @@
+<ion-header class="guest-page__header">
+    <ion-toolbar>
+        <div class="guest-page__header-bar">
+            <ion-title>
+                Guest Page
+            </ion-title>
+            <div>
+                <svg-icon 
+                    class="header-icon" 
+                    [src]="homeIcon" 
+                    (click)="goToHomePage()">
+                </svg-icon>
+                <svg-icon 
+                    class="header-icon" 
+                    [src]="cartIcon"
+                    (click)="openCart()">
+                </svg-icon>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content class="guest-page__content">
+    <ion-list class="stores-list">
+        <div 
+            *ngFor="let storeName of mockStoreNames"
+            class="stores-list__item"
+            (click)="goToStoresPage(storeName)"
+        >
+            <svg-icon [src]="shopIcon!" class="stores-list__item-icon"></svg-icon>
+            <p class="stores-list__item-name">{{ storeName }}</p>
+            <svg-icon [src]="moveToTheNextIcon!" class="stores-list__item-icon"></svg-icon>
+        </div>
+    </ion-list>
+    <app-pagination
+        class="guest-page__pagination"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+    ></app-pagination>
+</ion-content>

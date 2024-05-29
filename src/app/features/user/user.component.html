@@ -1,3 +1,52 @@
-<p>
-  user works!
-</p>
+<ion-header class="user__header">
+    <ion-toolbar>
+        <div class="user__header-bar">
+            <div class="user__header-icons">
+                <svg-icon 
+                    class="header-icon" 
+                    [src]="profileIcon" 
+                    (click)="goToProfile()">
+                </svg-icon>
+                <svg-icon 
+                    class="header-icon" 
+                    [src]="locationProvided ? locationCheckIcon : locationXmarkIcon"
+                    (click)="provideLocation()">
+                </svg-icon>
+            </div>
+            <ion-title class="user__header-text">
+                {{ user.username + ' page'}}
+            </ion-title>
+            <div class="user__header-icons">
+                <svg-icon 
+                    class="header-icon"
+                    [src]="homeIcon"
+                    (click)="goToHomePage()">
+                </svg-icon>
+                <svg-icon 
+                    class="header-icon" 
+                    [src]="cartIcon"
+                    (click)="openLists()">
+                </svg-icon>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-header>
+  
+<ion-content class="user__content">
+    <ion-list class="stores-list">
+        <div 
+            *ngFor="let storeName of mockStoreNames"
+            class="stores-list__item"
+            (click)="goToStoresPage(storeName)"
+        >
+            <svg-icon [src]="shopIcon!" class="stores-list__item-icon"></svg-icon>
+            <p class="stores-list__item-name">{{ storeName }}</p>
+            <svg-icon [src]="moveToTheNextIcon!" class="stores-list__item-icon"></svg-icon>
+        </div>
+    </ion-list>
+    <app-pagination
+        class="user__pagination"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+    ></app-pagination>
+</ion-content>
