@@ -1,13 +1,23 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Admin Statistics</ion-title>
+        <div class="header-toolbar">
+            <ion-title>Admin Statistics</ion-title>
+            <svg-icon 
+                class="header-icon" 
+                [src]="backIcon" 
+                (click)="goToAdminStores()">
+            </svg-icon>
+        </div>
     </ion-toolbar>
 </ion-header>
-  
+
 <ion-content>
+
     <ion-item>
-        <ion-label>Import Data</ion-label>
-        <input type="file" (change)="importData($event)" />
+        <ion-label>Choose Theme</ion-label>
+        <ion-select [(ngModel)]="selectedTheme">
+            <ion-select-option *ngFor="let theme of themes" [value]="theme">{{ theme }}</ion-select-option>
+        </ion-select>
     </ion-item>
   
     <ion-item>
@@ -16,32 +26,99 @@
             <ion-select-option *ngFor="let type of chartTypes" [value]="type">{{ type }}</ion-select-option>
         </ion-select>
     </ion-item>
-  
+
     <ion-item>
-        <ion-label>Choose Theme</ion-label>
-        <ion-select [(ngModel)]="selectedTheme">
-            <ion-select-option *ngFor="let theme of themes" [value]="theme">{{ theme }}</ion-select-option>
+        <ion-label>Choose Data For Chart</ion-label>
+        <ion-select [(ngModel)]="selectedDataShortCut" (ngModelChange)="onChartDataChange(selectedDataShortCut)">
+            <ion-select-option *ngFor="let data of filteredDataShortCuts" [value]="data.dataInfo">{{ data.dataInfo }}</ion-select-option>
         </ion-select>
     </ion-item>
   
-    <ion-button expand="full" (click)="generateChart()">Generate Chart</ion-button>
+    <ion-button class="stats-btn" expand="full" (click)="generateChart()">Generate Chart</ion-button>
+
+    <ion-button class="stats-btn" expand="full" (click)="exportChart()">Export Chart</ion-button>
   
-    <!-- <ngx-charts-bar-vertical
-      *ngIf="selectedChartType === 'vertical bar'"
-      [view]="view"
-      [scheme]="colorScheme"
-      [results]="chartData"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel">
-    </ngx-charts-bar-vertical> --> -->
-  
-    <!-- Add other chart types similarly
-  
+    <div #chart class="chart">
+        <ngx-charts-bar-vertical
+            *ngIf="selectedChartType === 'vertical bar'"
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="chartData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical>
+
+        <ngx-charts-bar-horizontal
+            *ngIf="selectedChartType === 'horizontal bar'"
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="chartData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-horizontal>
+
+        <ngx-charts-bar-vertical-2d
+            *ngIf="selectedChartType === 'grouped vertical bar'"
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="chartData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [groupPadding]="groupPadding">
+        </ngx-charts-bar-vertical-2d>
+
+        <ngx-charts-bar-horizontal-2d
+            *ngIf="selectedChartType === 'grouped horizontal bar'"
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="chartData"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            [groupPadding]="groupPadding">
+        </ngx-charts-bar-horizontal-2d>
+
+        <!-- <ngx-charts-pie-chart
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="data"
+            [gradient]="gradient"
+            [legend]="showLegend"
+            [labels]="showLabels"
+            [doughnut]="isDoughnut"
+            [explodeSlices]="explodeSlices"
+            [arcWidth]="arcWidth">
+        </ngx-charts-pie-chart>
+
+        <ngx-charts-pie-grid
+            [view]="view"
+            [scheme]="colorScheme"
+            [results]="data"
+            [legend]="showLegend">
+        </ngx-charts-pie-grid> -->
+
+    </div>
 </ion-content>
-  

@@ -1,101 +1,58 @@
+import { ListService } from '@app/core/api/list.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ListApiInterface } from '@app/core/dto/list.api.interface';
 import { ProductApiInterface } from '@app/core/dto/product.api.interface';
 import { DialogControllerService } from '@app/shared/services/dialog-controller.service';
+import { Observable } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { SuccessDialogComponent } from '../success-dialog/success-dialog.component';
+import { DialogType } from '@app/core/enums/dialog-type.enum';
 
 @Component({
   selector: 'app-choose-list-dialog',
   templateUrl: './choose-list-dialog.component.html',
   styleUrls: ['./choose-list-dialog.component.scss'],
 })
-export class ChooseListDialogComponent {
+export class ChooseListDialogComponent implements OnInit {
 
-    @Input() shoppingLists: {listInfo: ListApiInterface, products: {product: ProductApiInterface, quantity: number}[]}[] = [
-        {
-            listInfo: {
-                list_id: 1,
-                user_id: 1,
-                name: 'Groceries',
-                is_active: true
-            },
-            products: [
-                {
-                    product: {
-                        product_id: 1,
-                        name: 'Milk',
-                        description: '2L',
-                        price: 2.99,
-                        store_id: 1
-                    },
-                    quantity: 1
-                },
-                {
-                    product: {
-                        product_id: 2,
-                        name: 'Bread',
-                        description: 'White',
-                        price: 1.99,
-                        store_id: 1
-                    },
-                    quantity: 1
-                }
-            ]
-        },
-        {
-            listInfo: {
-                list_id: 2,
-                user_id: 1,
-                name: 'Hardware',
-                is_active: true
-            },
-            products: [
-                {
-                    product: {
-                        product_id: 3,
-                        name: 'Hammer',
-                        description: 'Claw',
-                        price: 12.99,
-                        store_id: 2
-                    },
-                    quantity: 1
-                },
-                {
-                    product: {
-                        product_id: 4,
-                        name: 'Screwdriver',
-                        description: 'Phillips',
-                        price: 7.99,
-                        store_id: 2
-                    },
-                    quantity: 1
-                }
-            ]
-        }
-    ];
+    shoppingLists$!: Observable<ListApiInterface[]>;
 
     quantity = 1;
-    selectedList = this.shoppingLists[0];
-    product: ProductApiInterface = {
-        product_id: 0,
-        name: '',
-        description: '',
-        price: 0,
-        store_id: 0
+    selectedList!: ListApiInterface;
+    product: ProductApiInterface = this.dialogService.dialogConfig.data.product;
+
+    constructor(
+        private dialogService: DialogControllerService,
+        private listService: ListService,
+        private store: Store
+    ) {}
+
+    ngOnInit(): void {
+        this.getShoppingLists();
+        this.shoppingLists$.subscribe(lists => {
+            this.selectedList = lists[0];
+        });
     }
 
-    constructor(private dialogService: DialogControllerService) {}
+    getShoppingLists() {
+        const user = this.store.selectSnapshot(state => state.user.user);
+        this.shoppingLists$ = this.listService.getListsByUserId(user.id);
+    }
   
     dismiss() {
         this.dialogService.closeDialog();
     }
 
-    chooseList(list: typeof this.shoppingLists[0]) {
+    chooseList(list: ListApiInterface) {
         this.selectedList = list;
     }
   
     addProductToList() {
-        this.selectedList.products.push({product: this.product, quantity: this.quantity});
-        this.dismiss();
+        this.selectedList.products.push(this.product);
+        this.listService.updateList(this.selectedList).subscribe(() => {
+            this.dialogService.dialogRef.close(true);
+            this.dialogService.openDialog(SuccessDialogComponent, "", DialogType.center, { message: "The product was successfully added to the list!" }, "100%", "360px");
+        });
     }
 
 }

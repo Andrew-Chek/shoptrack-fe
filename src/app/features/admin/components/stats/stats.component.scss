@@ -33,4 +33,47 @@ ion-button {
     font-size: 1rem;
     font-weight: 500;
 }
+
+.chart {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.file-input {
+    display: none;
+}
   
+ion-button {
+    --border-radius: 0;
+    --color: #fff;
+    --background: #35373c;
+}
+  
+span {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+
+.header-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    .header-icon {
+        path{
+            stroke: #fff;
+        }
+    }
+}
+
+.stats-btn {
+    --background: #35373c;
+    --color: #fff;
+    --border-radius: 8px;
+    --padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+}

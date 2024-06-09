@@ -11,16 +11,16 @@
                     (click)="goBack()">
                 </svg-icon>
                 <svg-icon
-                    [hidden]="!isAdmin"
+                    [hidden]="routeUsername !== 'admin'"
                     class="header-icon"
                     [src]="addProductIcon"
                     (click)="openProductDialog()">
                 </svg-icon>
                 <svg-icon 
-                    [hidden]="isAdmin"
+                    [hidden]="routeUsername === 'admin'"
                     class="header-icon" 
                     [src]="cartIcon" 
-                    (click)="isGuest ? openCart() : openLists()">
+                    (click)="routeUsername === 'guest' ? openCart() : openLists()">
                 </svg-icon>
             </div>
         </div>
@@ -29,21 +29,25 @@
   
 <ion-content class="store__content">
     <div class="store__search">
-        <input type="text" (input)="searchProducts()" placeholder="Search products..." />
+        <input type="text" (input)="searchProducts()" #inputElem placeholder="Search products..." />
     </div>
     
     <ion-list class="store__products-list">
-        <app-product-card 
-            *ngFor="let product of filteredProducts"
+        <app-product-card
+            (productsChanged)="onProductsChanged()"
+            [@slideInOutAnimation]
+            *ngFor="let product of filteredProducts$ | async"
             class="products-list__item"
             [product]="product"
-            [store]="store"
-            [isAdmin]="isAdmin"
+            [store]="(store$ | async)!"
+            [routeUsername]="routeUsername"
         >
         </app-product-card>
     </ion-list>
 
     <app-pagination
+        [totalPages]="totalPages"
+        [ngClass]="{ hidden: totalPages === 1 }"
         class="store__products-pagination"
         [currentPage]="currentPage"
         (pageChange)="onPageChange($event)"

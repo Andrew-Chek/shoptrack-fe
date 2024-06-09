@@ -7,6 +7,12 @@
             <div>
                 <svg-icon 
                     [ngClass]="{ hidden: !isAdmin }"
+                    class="header-icon stats-icon" 
+                    [src]="statsIcon"
+                    (click)="goToStatsPage()">
+                </svg-icon>
+                <svg-icon 
+                    [ngClass]="{ hidden: !isAdmin }"
                     class="header-icon" 
                     [src]="homeIcon" 
                     (click)="goHome()">
@@ -15,7 +21,7 @@
                     [ngClass]="{ hidden: !isAdmin }"
                     class="header-icon" 
                     [src]="addIcon" 
-                    (click)="openStoreDialog()">
+                    (click)="openAddStoreDialog()">
                 </svg-icon>
                 <svg-icon 
                     [ngClass]="{ hidden: isAdmin }"
@@ -27,7 +33,7 @@
                     class="header-icon"
                     [ngClass]="{ hidden: isAdmin }"
                     [src]="cartIcon" 
-                    (click)="isGuest ? openCart() : openLists()">
+                    (click)="routeUsername === 'guest' ? openCart() : openLists()">
                 </svg-icon>
             </div>
         </div>
@@ -36,7 +42,10 @@
   
 <ion-content class="stores-page__content">
     <ion-list class="stores-list">
-        <app-store-card *ngFor="let store of mockStores" 
+        <app-store-card 
+            (storesChanged)="onStoresChanged()"
+            [@slideInOutAnimation]
+            *ngFor="let store of filteredStores$ | async" 
             class="stores-list__item" 
             [store]="store"
             [isAdmin]="isAdmin"
@@ -44,6 +53,8 @@
         </app-store-card>
     </ion-list>
     <app-pagination
+        [totalPages]="((stores$ | async)?.length! / 5) | ceil"
+        [ngClass]="{ hidden: (stores$ | async)?.length! < 5 }"
         class="stores-page__pagination"
         [currentPage]="currentPage"
         (pageChange)="onPageChange($event)"

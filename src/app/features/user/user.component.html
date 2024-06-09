@@ -14,7 +14,7 @@
                 </svg-icon>
             </div>
             <ion-title class="user__header-text">
-                {{ user.username + ' page'}}
+                {{ user.username }}
             </ion-title>
             <div class="user__header-icons">
                 <svg-icon 
@@ -35,7 +35,8 @@
 <ion-content class="user__content">
     <ion-list class="stores-list">
         <div 
-            *ngFor="let storeName of mockStoreNames"
+            [@slideInOutAnimation]
+            *ngFor="let storeName of filteredStoreNames$ | async"
             class="stores-list__item"
             (click)="goToStoresPage(storeName)"
         >
@@ -45,6 +46,8 @@
         </div>
     </ion-list>
     <app-pagination
+        [totalPages]="((storeNames$ | async)?.length! / 5) | ceil"
+        [ngClass]="{ hidden: (storeNames$ | async)?.length! < 5 }"
         class="user__pagination"
         [currentPage]="currentPage"
         (pageChange)="onPageChange($event)"

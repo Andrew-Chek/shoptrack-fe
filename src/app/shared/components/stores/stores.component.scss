@@ -24,6 +24,12 @@ $card-margin: 0.5rem 0;
                 }
             }
 
+            .stats-icon {
+                path {
+                    fill: $text-color;
+                }
+            }
+
             .hidden {
                 display: none;
             }
@@ -69,4 +75,8 @@ $card-margin: 0.5rem 0;
             color: lighten($text-color, 20%);
         }
     }
+}
+
+.hidden {
+    display: none;
 }

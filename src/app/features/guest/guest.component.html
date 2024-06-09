@@ -22,8 +22,9 @@
   
 <ion-content class="guest-page__content">
     <ion-list class="stores-list">
-        <div 
-            *ngFor="let storeName of mockStoreNames"
+        <div
+            [@slideInOutAnimation]
+            *ngFor="let storeName of (filteredStoreNames$ | async)"
             class="stores-list__item"
             (click)="goToStoresPage(storeName)"
         >
@@ -33,6 +34,8 @@
         </div>
     </ion-list>
     <app-pagination
+        [totalPages]="((storeNames$ | async)?.length! / 5) | ceil"
+        [ngClass]="{ hidden: (storeNames$ | async)?.length! < 5 }"
         class="guest-page__pagination"
         [currentPage]="currentPage"
         (pageChange)="onPageChange($event)"

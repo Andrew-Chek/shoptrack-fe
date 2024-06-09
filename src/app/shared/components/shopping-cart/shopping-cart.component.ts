@@ -1,8 +1,9 @@
+import { ListService } from '@app/core/api/list.service';
 import { DialogControllerService } from './../../services/dialog-controller.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductApiInterface } from '@app/core/dto/product.api.interface';
-import { DialogType } from '@app/core/enums/dialog-type.enum';
 import { IconEnum } from '@app/core/icons.enum';
+import { GuestCartService } from '@app/shared/services/guest-cart.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,27 +12,34 @@ import { IconEnum } from '@app/core/icons.enum';
 })
 export class ShoppingCartComponent {
 
-    constructor(private dialogservice: DialogControllerService) { }
+    constructor(
+        private dialogservice: DialogControllerService,
+        private guestCartService: GuestCartService,
+        private dialogService: DialogControllerService,
+        private listService: ListService,
+    ) { }
+
+    isUser = this.dialogService.dialogConfig.data.isUser;
+    list = this.dialogService.dialogConfig.data.list;
 
     closeIcon = IconEnum.CloseIcon;
+    removeIcon = IconEnum.RemoveIcon;
 
-    products: ProductApiInterface[] = [
-        { product_id: 1, name: 'KitKat', price: 35, description: 'Description 1', store_id: 1},
-        { product_id: 2, name: 'Oranges', price: 77, description: 'Description 2', store_id: 1},
-        // Add more products as needed
-    ];
-
-    productValues = this.products.map(product => {
-        return {
-            product: product,
-            quantity: 1,
-        };
-    });
+    products: ProductApiInterface[] = this.isUser ? this.list.products : this.guestCartService.getProducts();
 
     getTotalPrice() {
-        return this.productValues.reduce((acc, product) => {
-            return acc + product.product.price * product.quantity;
-        }, 0);
+        return this.guestCartService.getTotalPrice(this.products);
+    }
+
+    removeFromCart(product: ProductApiInterface) {
+        if(this.isUser) {
+            this.listService.removeProductFromList(this.list, product.product_id).subscribe();
+            this.products = this.products.filter(p => p.product_id !== product.product_id);
+        }
+        else {
+            this.guestCartService.removeProduct(product);
+            this.products = this.guestCartService.getProducts();
+        }
     }
 
     closeDialog() {

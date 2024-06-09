@@ -58,6 +58,16 @@
             }
         }
     }
+
+    .cart-discount {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .hidden {
+        display: none;
+    }
 }
 
 @media screen and (min-height: 700px) {

@@ -10,6 +10,7 @@ export class PaginationComponent {
     constructor() { }
 
     @Input() currentPage: number = 1;
+    @Input() totalPages: number = 1;
     @Output() pageChange = new EventEmitter<number>();
 
     previousPage() {

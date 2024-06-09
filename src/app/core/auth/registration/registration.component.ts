@@ -6,6 +6,7 @@ import { routes } from 'app/core/constants/routes.const';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { IconEnum } from '@core/icons.enum';
 import { SignUpService } from '@core/services/sign-up.service';
+import { StoreService } from '@app/core/api/store.service';
 
 @UntilDestroy()
 @Component({
@@ -31,9 +32,15 @@ export class RegistrationComponent implements OnDestroy {
     public readonly radioInput = InputStyle.inputRadio;
     public readonly switchInput = InputStyle.inputSwitch;
 
+    public storeNames$ = this.storeService.getStoreNames();
+
     public isLoadingSignUpButton = false;
 
-    constructor(public router: Router, public signUpService: SignUpService) {}
+    constructor(
+        public router: Router, 
+        public signUpService: SignUpService,
+        public storeService: StoreService
+    ) {}
 
     public ngOnDestroy(): void {
         this.signUpService.resetForm();

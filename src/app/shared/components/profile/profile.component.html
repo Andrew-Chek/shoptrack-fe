@@ -14,10 +14,6 @@
 <ion-content class="profile__content">
     <div class="profile__body">
         <div class="profile__field">
-            <label>ID:</label>
-            <span>{{ user.userId }}</span>
-        </div>
-        <div class="profile__field">
             <label>Username:</label>
             <span>{{ user.username }}</span>
         </div>
@@ -27,7 +23,7 @@
         </div>
         <div class="profile__field">
             <label>Role:</label>
-            <span>{{ user.role }}</span>
+            <span>{{ user.roleId === 2 ? 'User' : 'Admin' }}</span>
         </div>
     </div>
 </ion-content>

@@ -18,7 +18,8 @@ export class SignUpService {
         password: FormControl; 
         username: FormControl; 
         email: FormControl; 
-        checkBox: FormControl 
+        checkBox: FormControl;
+        store: FormControl;
     }>;
 
     private usernameErrorMessage = new BehaviorSubject<string>('');
@@ -72,6 +73,10 @@ export class SignUpService {
         return this.signUpForm.controls.password;
     }
 
+    private get storeControl(): FormControl {
+        return this.signUpForm.controls.store;
+    }
+
     /* Methods */
     public resetForm(): void {
         this.signUpForm.reset();
@@ -88,11 +93,13 @@ export class SignUpService {
             username: this.signUpForm.controls.username.value?.toLowerCase().trim(),
             email: this.signUpForm.controls.email.value?.toLowerCase().trim(),
             password: this.signUpForm.controls.password.value?.trim(),
-            role: this.signUpForm.controls.checkBox.value ? 'Admin' : 'User',
+            roleId: this.signUpForm.controls.checkBox.value ? 1 : 2,
+            storeName: this.signUpForm.controls.store.value,
         };
 
         return this.store.dispatch(new Registration(payload)).pipe(
             catchError((error: Error) => {
+                console.error('Error in registration', error);
                 this.toasterService.showToaster('Something went wrong.');
                 return of(error);
             }),
@@ -113,6 +120,7 @@ export class SignUpService {
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(4), Validators.pattern(/^[^\s]+$/)]],
             checkBox: [false],
+            store: [''],
         });
     }
 
@@ -182,17 +190,5 @@ export class SignUpService {
         this.monitorControlStatusChanges(this.usernameControl, this.usernameErrorMessage, this.getUsernameErrorMessage);
         this.monitorControlStatusChanges(this.emailControl, this.emailErrorMessage, this.getEmailErrorMessage);
         this.monitorControlStatusChanges(this.passwordControl, this.passwordErrorMessage, this.getPasswordErrorMessage);
-    }
-
-    private initCheckboxPulseMonitoring(): void {
-        combineLatest([this.usernameControl.statusChanges, this.passwordControl.statusChanges])
-            .pipe(untilDestroyed(this))
-            .subscribe(data => {
-                if (data.every(status => status === inputValidation.VALID)) {
-                    this.shouldPulse$.next(true);
-                } else {
-                    this.shouldPulse$.next(false);
-                }
-            });
     }
 }

@@ -11,16 +11,6 @@ ion-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .header-icon {
-        padding: 0 10px;
-        path {
-            stroke: #fff;
-        }
-        polygon {
-            fill: #fff;
-        }
-    }
 }
 
 ion-content {
@@ -33,10 +23,32 @@ ion-list {
     color: white;
 }
 
+.header-icon, .list-icon {
+    padding: 0 10px;
+    path {
+        stroke: #fff;
+    }
+    polygon {
+        fill: #fff;
+    }
+}
+
 ion-item {
     background: #35373c;
     color: white;
     margin: 0.5rem 0;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.archived {
+    text-decoration: line-through;
+    color: #ccc;
 }
 
 ion-button {

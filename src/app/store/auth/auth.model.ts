@@ -1,8 +1,10 @@
+import { StoreApiInterface } from "@app/core/dto/store.api.inteface";
+
 export interface AuthModel {
     email: string;
     id: number;
     username: string;
-    role: string;
+    role_id: number;
 }
 
 export interface SigninParams {
@@ -14,7 +16,8 @@ export interface RegistrationParams {
     username: string;
     email: string;
     password: string;
-    role: string;
+    roleId: number;
+    storeName: string
 }
 
 export interface ForgotPasswordParams {

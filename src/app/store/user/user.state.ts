@@ -3,7 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { UserService } from 'app/core/api/user.service';
 import { ToasterService } from 'app/shared/services/toaster.service';
 import { catchError, tap } from 'rxjs';
-import { UpdateUser, UpdateUserInStore } from './user.action';
+import { LogoutUser, UpdateUser, UpdateUserInStore } from './user.action';
 import { UserModel } from './user.model';
 
 @State<UserModel>({
@@ -39,7 +39,7 @@ export class UserState {
     update_user_in_store({ patchState, getState }: StateContext<UserModel>, action: UpdateUserInStore) {
         const { user } = getState();
 
-        if (!user) {
+        if (!user || user === undefined || user === null) {
             patchState({
                 user: action.payload,
             });
@@ -48,5 +48,12 @@ export class UserState {
                 user: { ...user, ...action.payload },
             });
         }
+    }
+
+    @Action(LogoutUser)
+    logout_user({ patchState }: StateContext<UserModel>) {
+        patchState({
+            user: undefined,
+        });
     }
 }

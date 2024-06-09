@@ -15,10 +15,11 @@ import { ChooseListDialogModule } from './components/choose-list-dialog/choose-l
 import { AddListModule } from './components/add-list/add-list.module';
 import { AddProductModule } from './components/add-product/add-product.module';
 import { AddStoreModule } from './components/add-store/add-store.module';
+import { CeilPipe } from './pipes/ceil.pipe';
 
 
 @NgModule({
-    declarations: [],
+    declarations: [CeilPipe],
     imports: [
         CommonModule,
         AngularSvgIconModule,
@@ -53,7 +54,8 @@ import { AddStoreModule } from './components/add-store/add-store.module';
         ChooseListDialogModule,
         PaginationModule,
         ReactiveFormsModule,
-        TranslateModule
+        TranslateModule,
+        CeilPipe
     ]
 })
 export class SharedModule { }

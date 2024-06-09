@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { StatsComponent } from './stats.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-// import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { RouterModule } from '@angular/router';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 
 
@@ -13,7 +15,14 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         IonicModule,
         FormsModule,
-        // NgxChartsModule
+        NgxChartsModule,
+        AngularSvgIconModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: StatsComponent
+            }
+        ])
     ]
 })
 export class StatsModule { }

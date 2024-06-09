@@ -1,5 +1,5 @@
 <ion-card class="product-card">
-    <img src="../../../../assets/images/product-test.png" alt="{{ product.name }}" class="product-card__image" />
+    <img src="../../../../assets/images/test-product.jpg" alt="{{ product.name }}" class="product-card__image" />
     <ion-card-header class="product-card__header">
         {{ product.name }}
     </ion-card-header>
@@ -8,7 +8,11 @@
     </ion-card-content>
     <ion-card-content class="product-card__content cart-content">
         <p class="cart-price">Price: {{ product.price }} UAH</p>
-        <svg-icon [hidden]="isAdmin" class="cart-icon" [src]="addToCartIcon" (click)="addToCart()"></svg-icon>
-        <svg-icon [hidden]="!isAdmin" class="cart-icon" [src]="editIcon" (click)="openEditDialog()"></svg-icon>
+        <p *ngIf="product.discounts.length > 0" class="cart-discount">Discount: {{ product.discounts[0].amount }}%</p>
+        <svg-icon [ngClass]="{ hidden: routeUsername === 'admin' }" class="cart-icon" [src]="addToCartIcon" (click)="addToCart()"></svg-icon>
+        <div [ngClass]="{ hidden: routeUsername !== 'admin' }">
+            <svg-icon class="cart-icon" [src]="editIcon" (click)="openEditDialog()"></svg-icon>
+            <svg-icon class="cart-icon" [src]="deleteIcon" (click)="openDeleteDialog()"></svg-icon>
+        </div>
     </ion-card-content>
 </ion-card>

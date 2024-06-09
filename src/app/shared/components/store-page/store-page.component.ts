@@ -1,5 +1,5 @@
 import { DialogControllerService } from '@app/shared/services/dialog-controller.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostBinding, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from '@app/core/constants/routes.const';
 import { ProductApiInterface } from '@app/core/dto/product.api.interface';
@@ -8,48 +8,66 @@ import { DialogType } from '@app/core/enums/dialog-type.enum';
 import { IconEnum } from '@app/core/icons.enum';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 import { AddProductComponent } from '../add-product/add-product.component';
-
+import { Observable, concatMap, map, tap, of } from 'rxjs';
+import { StoreService } from '@app/core/api/store.service';
+import { slideInOutAnimation } from '@app/shared/animations/slideInOutAnimation';
 @Component({
-  selector: 'app-store-page',
-  templateUrl: './store-page.component.html',
-  styleUrls: ['./store-page.component.scss'],
+    selector: 'app-store-page',
+    templateUrl: './store-page.component.html',
+    styleUrls: ['./store-page.component.scss'],
+    animations: [slideInOutAnimation]
 })
-export class StorePageComponent implements OnInit{
+export class StorePageComponent implements OnInit {
 
-    constructor(private router: Router, private route: ActivatedRoute, private dialogService: DialogControllerService) { }
+    @HostBinding('@slideInOutAnimation')
+    animatePage = true;
+
+    @ViewChild('inputElem')
+    inputElem!: ElementRef<HTMLInputElement>;
+
+    constructor(
+        private router: Router, 
+        private route: ActivatedRoute, 
+        private dialogService: DialogControllerService,
+        private storeService: StoreService
+    ) { }
 
     backIcon = IconEnum.BackIcon;
     cartIcon = IconEnum.ShoppingCartIcon;
     addProductIcon = IconEnum.AddProductIcon;
     routeUsername = "guest";
-    isGuest: boolean = this.routeUsername === "guest" ? true : false;
-    isAdmin: boolean = this.routeUsername === "admin" ? true : false;
 
-    @Input() store: StoreApiInterface = { store_id: 1, name: "Beresteiskyi Ave, 18, Kyiv, 01135", location: '', address: "Polkovnyka Potjekhina St, 2, Kyiv, 02000" };
+    store$!: Observable<StoreApiInterface>;
 
     storeName: string | null = null;
-    products: ProductApiInterface[] = [
-        { product_id: 1, name: 'KitKat', price: 35, description: 'Delicious chocolate wafer', store_id: 1 },
-        { product_id: 2, name: 'Oranges', price: 77, description: 'Fresh and juicy oranges', store_id: 1 },
-        // Add more products as needed
-    ];
-    filteredProducts = this.products;
+    totalPages = 0;
+    filteredProducts$!: Observable<ProductApiInterface[]>;
     cart: ProductApiInterface[] = [];
-    searchTerm: string = '';
     currentPage: number = 1;
-    totalPages: number = Math.ceil(this.products.length / 10);
 
     ngOnInit(): void {
-        const navigation = this.router.getCurrentNavigation();
-        if (navigation?.extras?.state) {
-            this.storeName = navigation.extras.state['storeName'];
-        } else {
-            this.route.paramMap.subscribe(params => {
-                this.storeName = params.get('storeName');
-            });
-        }
+        this.route.paramMap.subscribe(params => {
+            this.storeName = params.get('storeName');
+            this.store$ = this.storeService.getStoreById(params.get('store_id')!);
+            const products$ = this.store$.pipe(map(store => store.products));
+            this.filteredProducts$ = this.getProductsByPage(products$, this.currentPage);
+            this.getTotalPages(products$);
+        });
 
         this.getRouteUsernameFromUrl();
+    }
+
+    getTotalPages(products$: Observable<ProductApiInterface[]>) {
+        products$.pipe(
+            tap(products => {
+                this.totalPages = Math.ceil(products.length / 5)
+        })).subscribe();
+    }
+
+    getProductsByPage(products$: Observable<ProductApiInterface[]>, page: number) {
+        return products$.pipe(
+            map(products => products.slice((page - 1) * 5, page * 5))
+        );
     }
 
     addToCart(product: ProductApiInterface) {
@@ -62,9 +80,9 @@ export class StorePageComponent implements OnInit{
     }
 
     goBack() {
-        if(this.isGuest)
+        if(this.routeUsername === 'guest')
             this.router.navigate([routes.features, routes.guest, routes.storeAddresses, this.storeName]);
-        else if(this.isAdmin)
+        else if(this.routeUsername === 'admin')
             this.router.navigate([routes.features, routes.admin, routes.storeAddresses, this.storeName]);
         else
             this.router.navigate([routes.features, routes.user, routes.storeAddresses, this.storeName]);
@@ -75,34 +93,66 @@ export class StorePageComponent implements OnInit{
     }
 
     openProductDialog() {
-        this.dialogService.openDialog(AddProductComponent, "", DialogType.center, null, '100%', '485px');
+        const storeId = this.route.snapshot.paramMap.get('store_id')!;
+
+        this.dialogService.openDialog(AddProductComponent, "", DialogType.center, { store_id: storeId }, '100%', '485px');
+
+        this.dialogService.dialogRef.onClose.subscribe((result: boolean) => {
+            if(result) {
+                this.onProductsChanged();
+            }
+        });
     }
 
     onPageChange(newPage: number) {
         this.currentPage = newPage;
-        // Update your store list based on the new page
+        const products$ = this.store$.pipe(map(store => store.products));
+        this.filteredProducts$ = this.getProductsByPage(products$, this.currentPage);
     }
 
     searchProducts() {
-        this.filteredProducts = this.products.filter(product => product.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+        if(this.inputElem.nativeElement.value === '') {
+            const products$ = this.store$.pipe(map(store => store.products));
+            this.currentPage = 1;
+            this.getTotalPages(products$);
+            this.filteredProducts$ = this.getProductsByPage(products$, this.currentPage);
+            return;
+        }
+        else {
+            const searchedProducts$ = this.store$.pipe(
+                map(store => store.products.filter(product => 
+                    product.name.toLowerCase().includes(this.inputElem.nativeElement.value.toLowerCase())
+                )));
+            this.currentPage = 1;
+            this.getTotalPages(searchedProducts$);
+            console.log('Total Pages:', this.totalPages);
+            this.filteredProducts$ = this.getProductsByPage(searchedProducts$, this.currentPage);
+        }
+    }
+
+    onProductsChanged() {
+        const id = this.route.snapshot.paramMap.get('store_id')!;
+
+        this.storeService.getStoreById(id).pipe(
+            concatMap(store => {
+                this.totalPages = Math.ceil(store.products.length / 5);
+                return this.storeService.getStoreById(id).pipe(map(store => store.products));
+            })
+        ).subscribe(products => {
+            this.filteredProducts$ = this.getProductsByPage(of(products), this.currentPage);
+        });
     }
 
     getRouteUsernameFromUrl() {
         const url = this.router.url;
         if(url.includes("guest")) {
             this.routeUsername = "guest";
-            this.isGuest = true;
-            this.isAdmin = false;
         }
         else if(url.includes("user")){
             this.routeUsername = "user";
         }
         else {
             this.routeUsername = "admin";
-            this.isAdmin = true;
-            this.isGuest = false;
         }
-
-        console.log('Route username:', this.routeUsername);
     }
 }

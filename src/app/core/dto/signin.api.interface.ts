@@ -2,6 +2,7 @@ export interface UserApiInterface {
     userId: number;
     username: string;
     email: string;
-    role: string;
+    roleId: number;
     token: string;
+    storeName: string;
 }

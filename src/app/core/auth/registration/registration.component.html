@@ -34,6 +34,7 @@
         </div>
         <div class="registration__confirm">
             <app-checkbox
+                #isAdminCheckbox
                 formControlName="checkBox"
                 [inputStyle]="checkInput"
                 [inputType]="checkType"
@@ -43,6 +44,12 @@
             <p class="registration__info">
                 {{ 'auth.registration.consent' | translate }}
             </p>
+        </div>
+        <div *ngIf="isAdminCheckbox.InnerValue" class="registration__filed registration__admin">
+            <ion-label>{{ 'auth.selectstore' | translate }}</ion-label>
+            <ion-select formControlName="store">
+                <ion-select-option *ngFor="let storeName of storeNames$ | async" [value]="storeName">{{ storeName }}</ion-select-option>
+            </ion-select>
         </div>
         <app-button
             [buttonTheme]="primaryButton"

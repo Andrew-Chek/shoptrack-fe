@@ -1,34 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { StoreService } from '@app/core/api/store.service';
 import { routes } from '@app/core/constants/routes.const';
 import { UserApiInterface } from '@app/core/dto/signin.api.interface';
 import { DialogType } from '@app/core/enums/dialog-type.enum';
 import { IconEnum } from '@app/core/icons.enum';
+import { slideInOutAnimation } from '@app/shared/animations/slideInOutAnimation';
 import { ShoppingCartComponent } from '@app/shared/components/shopping-cart/shopping-cart.component';
 import { WarningDialogComponent } from '@app/shared/components/warning-dialog/warning-dialog.component';
 import { DialogControllerService } from '@app/shared/services/dialog-controller.service';
+import { LogoutUser } from '@app/store/user/user.action';
+import { Store } from '@ngxs/store';
+import { Observable, map } from 'rxjs';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+    selector: 'app-user',
+    templateUrl: './user.component.html',
+    styleUrls: ['./user.component.scss'],
+    animations: [slideInOutAnimation]
 })
 export class UserComponent {
 
-    constructor(private router: Router, private dialogService: DialogControllerService) { }
+    @HostBinding('@slideInOutAnimation')
+    public animatePage = true;
 
-    public user: UserApiInterface = {
-        userId: 1,
-        username: 'User 1',
-        email: 'testmail@gmail.com',
-        role: 'User',
-        token: '',
-    }
+    constructor(
+        private router: Router, 
+        private dialogService: DialogControllerService, 
+        private storeService: StoreService,
+        private store: Store) { }
+
+    public user: UserApiInterface = this.store.selectSnapshot(state => state.user.user);
 
     locationProvided: boolean = false;
 
-    mockStoreNames: string[] = ["Store 1", "Store 2", "Store 3", "Store 4", "Store 5", "Store 6", "Store 7", "Store 8", "Store 9", "Store 10"];
+    storeNames$: Observable<string[]> = this.storeService.getStoreNames();
     currentPage = 1;
+    filteredStoreNames$: Observable<string[]> = this.getStoreNamesByPage(this.storeNames$, this.currentPage);
 
     homeIcon = IconEnum.HomeIcon;
     shopIcon = IconEnum.ShopIcon;
@@ -43,6 +51,7 @@ export class UserComponent {
     }
 
     goToHomePage() {
+        this.store.dispatch(new LogoutUser());
         this.router.navigate([routes.home]);
     }
 
@@ -64,9 +73,13 @@ export class UserComponent {
         });
     }
 
+    getStoreNamesByPage(storeNames$: Observable<string[]>, page: number): Observable<string[]> {
+        return storeNames$.pipe(map(storeNames => storeNames.slice((page - 1) * 5, page * 5)));
+    }
+
     onPageChange(newPage: number) {
         this.currentPage = newPage;
-        // Update your store list based on the new page
+        this.filteredStoreNames$ = this.getStoreNamesByPage(this.storeNames$, this.currentPage);
     }
 
     openLists() {

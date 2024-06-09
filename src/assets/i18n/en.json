@@ -27,6 +27,7 @@
         "name": "Name"
     },
     "auth": {
+        "selectstore": "Select store",
         "resetpassword": "Reset password",
         "newpasswordtip": "Please, enter a new password below.",
         "confirmpassword": "Confirm new password",

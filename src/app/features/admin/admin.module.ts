@@ -24,10 +24,10 @@ import { StatsModule } from './components/stats/stats.module';
                 path: routes.profile,
                 loadChildren: () => import('../../shared/components/profile/profile.module').then(m => m.ProfileModule),
             },
-            // {
-            //     path: routes.stats,
-            //     loadChildren: () => import('./components/stats/stats.module').then(m => m.StatsModule),
-            // }
+            {
+                path: `${routes.stats}/:storeName`,
+                loadChildren: () => import('./components/stats/stats.module').then(m => m.StatsModule),
+            }
         ]),
     ]
 })

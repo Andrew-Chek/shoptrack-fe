@@ -14,3 +14,8 @@ export class VerifyUser {
     static readonly type = '[USER] Verify user';
     constructor() {}
 }
+
+export class LogoutUser {
+    static readonly type = '[USER] Logout user';
+    constructor() {}
+}

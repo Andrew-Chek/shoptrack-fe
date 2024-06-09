@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { routes } from '@app/core/constants/routes.const';
 import { StoreApiInterface } from '@app/core/dto/store.api.inteface';
@@ -7,52 +7,61 @@ import { IconEnum } from '@app/core/icons.enum';
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 import { DialogControllerService } from '@app/shared/services/dialog-controller.service';
 import { AddStoreComponent } from '../add-store/add-store.component';
+import { StoreService } from '@app/core/api/store.service';
+import { Observable, map } from 'rxjs';
+import { slideInOutAnimation } from '@app/shared/animations/slideInOutAnimation';
 
 @Component({
-  selector: 'app-stores',
-  templateUrl: './stores.component.html',
-  styleUrls: ['./stores.component.scss'],
+    selector: 'app-stores',
+    templateUrl: './stores.component.html',
+    styleUrls: ['./stores.component.scss'],
+    animations: [slideInOutAnimation]
 })
-export class StoresComponent implements OnInit{
+export class StoresComponent implements OnInit {
 
-    constructor(private router: Router, private route: ActivatedRoute, private dialogService: DialogControllerService) { }
+    @HostBinding('@slideInOutAnimation')
+    public animatePage = true;
 
-    shopLocation: string = "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17093.567788168126!2d30.49348185056919!3d50.441583937372336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce86098b6587%3A0x266d22c2cee60d05!2z0JDQotCRLdCc0LDRgNC60LXRgg!5e0!3m2!1suk!2sua!4v1715603453839!5m2!1suk!2sua\" width=\"300\" height=\"225\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+    constructor(private router: Router, private route: ActivatedRoute, private dialogService: DialogControllerService, private storeService: StoreService) { }
 
     storeName = "";
     currentPage = 1;
     routeUsername = "guest";
 
-    isGuest = this.routeUsername == "guest" ? true : false;
     isAdmin = this.routeUsername == "admin" ? true : false;
 
     backIcon = IconEnum.BackIcon;
     cartIcon = IconEnum.ShoppingCartIcon;
     addIcon = IconEnum.AddProductIcon;
     homeIcon = IconEnum.HomeIcon;
+    statsIcon = IconEnum.StatsIcon;
 
-    mockStores: StoreApiInterface[] = [
-        { store_id: 1, name: "Store 1", location: this.shopLocation, address: "Beresteiskyi Ave, 18, Kyiv, 01135" },
-        { store_id: 2, name: "Store 2", location: this.shopLocation, address: "Polkovnyka Potjekhina St, 2, Kyiv, 02000" },
-        { store_id: 3, name: "Store 3", location: this.shopLocation, address: "Address 3" },
-        { store_id: 4, name: "Store 4", location: this.shopLocation, address: "Address 4" },
-        { store_id: 5, name: "Store 5", location: this.shopLocation, address: "Address 5" },
-        { store_id: 6, name: "Store 6", location: this.shopLocation, address: "Address 6" },
-        { store_id: 7, name: "Store 7", location: this.shopLocation, address: "Address 7" },
-        { store_id: 8, name: "Store 8", location: this.shopLocation, address: "Address 8" },
-        { store_id: 9, name: "Store 9", location: this.shopLocation, address: "Address 9" },
-        { store_id: 10, name: "Store 10", location: this.shopLocation, address: "Address 10" }
-    ];
+    stores$!: Observable<StoreApiInterface[]>;
+    filteredStores$!: Observable<StoreApiInterface[]>;
+
+    ngOnInit(): void {
+        this.route.paramMap.subscribe(params => {
+            this.storeName = params.get('storeName')!;
+        });
+        this.stores$ = this.storeService.getStoresByName(this.storeName);
+        this.filteredStores$ = this.getStoresByPage(this.stores$, this.currentPage);
+
+        this.getRouteUsernameFromUrl();
+    }
+
+    goToStatsPage() {
+        this.router.navigate([routes.features, routes.admin, routes.stats, this.storeName]);
+    }
 
     goToStorePage(store: StoreApiInterface) {
         if(this.routeUsername === "guest") {
-            this.router.navigate([routes.features, routes.guest, routes.storeAddresses, this.storeName, routes.storePage, store.store_id], { state: { store } });
+            this.router.navigate([routes.features, routes.guest, routes.storeAddresses, this.storeName, routes.storePage, store.store_id]);
         }
         else if(this.routeUsername === "user") {
-            this.router.navigate([routes.features, routes.user, routes.storeAddresses, this.storeName, routes.storePage, store.store_id], { state: { store } });
+            this.router.navigate([routes.features, routes.user, routes.storeAddresses, this.storeName, routes.storePage, store.store_id]);
         }
         else {
-            this.router.navigate([routes.features, routes.admin, routes.storeAddresses, this.storeName, routes.storePage, store.store_id], { state: { store } });
+            this.router.navigate([routes.features, routes.admin, routes.storeAddresses, this.storeName, routes.storePage, store.store_id]);
         }
     }
 
@@ -72,8 +81,20 @@ export class StoresComponent implements OnInit{
         this.router.navigate([routes.home]);
     }
 
-    openStoreDialog() {
+    openAddStoreDialog() {
         this.dialogService.openDialog(AddStoreComponent, "", DialogType.center, null, "100%", "360px");
+
+        this.dialogService.dialogRef.onClose.subscribe((result: boolean) => {
+            if (result) {
+                this.stores$ = this.storeService.getStoresByName(this.storeName);
+                this.filteredStores$ = this.getStoresByPage(this.stores$, this.currentPage);
+            }
+        });
+    }
+
+    onStoresChanged() {
+        this.stores$ = this.storeService.getStoresByName(this.storeName);
+        this.filteredStores$ = this.getStoresByPage(this.stores$, this.currentPage);
     }
 
     openCart() {
@@ -86,29 +107,17 @@ export class StoresComponent implements OnInit{
 
     onPageChange(newPage: number) {
         this.currentPage = newPage;
-        // Update your store list based on the new page
+        this.filteredStores$ = this.getStoresByPage(this.stores$, this.currentPage);
     }
 
-    ngOnInit(): void {
-        const navigation = this.router.getCurrentNavigation();
-        if (navigation?.extras?.state) {
-            this.storeName = navigation.extras.state['storeName'];
-        } else {
-            // Optionally, handle the case where there is no state
-            // For example, you might want to retrieve the store name from the route parameters
-            this.route.paramMap.subscribe(params => {
-                this.storeName = params.get('storeName')!;
-            });
-
-            this.getRouteUsernameFromUrl();
-        }
+    getStoresByPage(stores$: Observable<StoreApiInterface[]>, page: number): Observable<StoreApiInterface[]> {
+        return stores$.pipe(map(stores => stores.slice((page - 1) * 5, page * 5)));
     }
 
     getRouteUsernameFromUrl() {
         const url = this.router.url;
         if(url.includes("guest")) {
             this.routeUsername = "guest";
-            this.isGuest = true;
         }
         else if(url.includes("user")){
             this.routeUsername = "user";

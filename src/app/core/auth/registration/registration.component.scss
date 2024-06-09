@@ -33,6 +33,16 @@
         margin-bottom: 32px;
     }
 
+    &__admin {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        ion-label {
+            display: flex;
+            align-items: center;
+        }
+    }
+
     &__firstFiled {
         display: block;
         margin-bottom: 24px;

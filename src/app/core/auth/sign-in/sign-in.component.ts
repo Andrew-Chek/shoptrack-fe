@@ -8,6 +8,7 @@ import { SignInService } from 'app/core/services/sign-in.service';
 import { IconEnum } from '@core/icons.enum';
 import { VaultService } from '@shared/services/storage.service';
 import { filter } from 'rxjs';
+import { Store } from '@ngxs/store';
 
 @UntilDestroy()
 @Component({
@@ -27,7 +28,12 @@ export class SignInComponent implements OnInit, OnDestroy {
 
     public isLoadingButton$ = this.signInService.isLoadingLoginButton$;
 
-    constructor(public router: Router, public signInService: SignInService, private vaultService: VaultService) {}
+    constructor(
+        public router: Router, 
+        public signInService: SignInService, 
+        private vaultService: VaultService,
+        private store: Store
+    ) {}
 
     ngOnInit() {
         this.vaultService.removePrevUserFromLocalStorage();
@@ -39,13 +45,12 @@ export class SignInComponent implements OnInit, OnDestroy {
 
     public onSubmit(): void {
         const signIn$ = this.signInService.signIn();
-
         if (signIn$) {
             signIn$.pipe(filter(Boolean), untilDestroyed(this)).subscribe(async res => {
-                if(res.user.user.role === 'User')
+                if(res.user.user.roleId === 2)
                     await this.router.navigate([routes.features, routes.user]);
-                else if(res.user.user.role === 'Admin')
-                    await this.router.navigate([routes.features, routes.admin]);
+                else if(res.user.user.roleId === 1)
+                    await this.router.navigate([routes.features, routes.admin, routes.storeAddresses, res.user.user.storeName]);
             });
         }
     }

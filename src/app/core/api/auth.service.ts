@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '@core/constants/routes.const';
-import { AUTH } from 'app/core/constants/api-urls';
+import { AUTH, USER } from 'app/core/constants/api-urls';
 import { UserApiInterface } from '@app/core/dto/signin.api.interface';
 import { RegistrationApiInterface } from 'app/core/dto/registration.api.interface';
 import {
@@ -27,8 +27,12 @@ export class AuthService {
     }
 
     public registration(body: RegistrationParams): Observable<RegistrationApiInterface | UserApiInterface> {
-        const params = new HttpParams().set('deviceType', 'mobile');
-        return this.http.post<RegistrationApiInterface>(AUTH.registration, body, { params });
+        return this.http.post<RegistrationApiInterface>(AUTH.registration, body);
+    }
+
+    // Метод для оновлення користувача з прив'язкою до магазину
+    updateUserStore(userId: number, storeId: number): Observable<any> {
+        return this.http.put<any>(`${USER.users}/${userId}/assign-store`, { storeId });
     }
 
     public forgotPassword(body: ForgotPasswordParams): Observable<ArrayBuffer> {

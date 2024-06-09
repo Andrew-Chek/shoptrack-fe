@@ -43,7 +43,7 @@ $card-margin: 0.5rem 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    background-color: $card-background;
+    background-color: #151719;
     &__item {
         margin-bottom: 1px;
         border-bottom: 1px solid $app-neutral-900;
@@ -75,6 +75,10 @@ $card-margin: 0.5rem 0;
             background-color: darken($card-background, 10%);
         }
     }
+}
+
+.hidden {
+    display: none;
 }
 
 

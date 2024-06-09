@@ -13,12 +13,19 @@
     </ion-header>
     
     <ion-content class="shopping-cart__content">
-        <ion-list class="shopping-cart__list">
-            <ion-item *ngFor="let productInfo of productValues" class="shopping-cart__item">
-                <div class="shopping-cart__item-details">
-                    <p class="shopping-cart__item-name">{{ productInfo.product.name }}</p>
-                    <p class="shopping-cart__item-price">{{ productInfo.product.price }} UAH</p>
-                    <p class="shopping-cart__item-quantity">Quantity: {{ productInfo.quantity }}</p>
+        <ion-list class="shopping-cart__list" *ngIf="products.length > 0">
+            <ion-item *ngFor="let product of products" class="shopping-cart__item">
+                <div class="shopping-cart__item-inner">
+                    <div class="shopping-cart__item-details">
+                        <p class="shopping-cart__item-name">{{ product.name }}</p>
+                        <p class="shopping-cart__item-price">{{ product.price }} UAH</p>
+                    </div>
+                    <svg-icon 
+                        class="shopping-cart__item-icon" 
+                        [src]="removeIcon" 
+                        (click)="removeFromCart(product)"
+                    >
+                    </svg-icon>
                 </div>
             </ion-item>
         </ion-list>
